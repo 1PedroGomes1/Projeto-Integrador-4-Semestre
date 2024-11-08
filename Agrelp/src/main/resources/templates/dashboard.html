@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Máquinas - Cards</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="text-white" style="background-color: #212121;">
+
+    <!-- Inclui a sidebar como fragmento -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <br>
+    <hr>
+
+    <h1 class="text-center mb-0 font-weight-bold texto-com-margens text-white dashboard-title">Dashboard <span class="badge badge-secondary"></span></h1>
+    <h6 class="text-center texto-com-margens text-white painel-title">Um painel analítico para a visualização geral</h6>
+
+    <br>
+
+    <div class="container text-center">
+        <div class="container-cards"> <!-- Adicionada a classe para centralização -->
+            <div class="row">
+
+                <!-- Total de Máquinas -->
+                <div class="col-md-4 d-flex justify-content-center"> <!-- Flexbox para centralização -->
+                    <div class="card border-warning bg-dark" style="max-width: 18rem;">
+                        <div class="card-header text-center text-warning border-warning">
+                            <i class="fa-solid fa-tractor"></i> <!-- Ícone para Máquinas -->
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title custom-text-size-2 text-white">Total de Máquinas</h5>
+                            <p class="card-text custom-text-size">
+                                <span class="text-white" th:text="${quantidadeMaquinas}">0</span> <!-- Quantidade de máquinas -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total de Ferramentas -->
+                <div class="col-md-4 d-flex justify-content-center"> <!-- Flexbox para centralização -->
+                    <div class="card border-info bg-dark" style="max-width: 18rem;">
+                        <div class="card-header text-center text-info border-info">
+                            <i class="fas fa-hammer"></i> <!-- Ícone para Ferramentas -->
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title custom-text-size-2 text-white">Total de Ferramentas</h5>
+                            <p class="card-text custom-text-size">
+                                <span class="text-white" th:text="${quantidadeFerramentas}">0</span> <!-- Quantidade de ferramentas -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total de Sementes -->
+                <div class="col-md-4 d-flex justify-content-center"> <!-- Flexbox para centralização -->
+                    <div class="card border-success bg-dark" style="max-width: 18rem;">
+                        <div class="card-header text-center text-success border-success">
+                            <i class="fas fa-seedling"></i> <!-- Ícone para Sementes -->
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title custom-text-size-2 text-white">Total de Sementes</h5>
+                            <p class="card-text custom-text-size">
+                                <span class="text-white" th:text="${quantidadeSementes}">0</span> <!-- Quantidade de sementes -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

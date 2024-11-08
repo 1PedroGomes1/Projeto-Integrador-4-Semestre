@@ -1,0 +1,126 @@
+/* cards.css */
+
+/* Card container styling */
+.card {
+  --background: linear-gradient(to right, #13b37f 0%, #11a3c8 100%);
+  width: 300px; /* Aumenta a largura */
+  height: 400px; /* Aumenta a altura */
+  padding: 0.9px;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+  margin: 20px auto; /* Center card horizontally within its column */
+}
+
+/* Glow effect behind the card */
+.card::after {
+  position: absolute;
+  content: "";
+  top: -22px;
+  left: 0px;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.76);
+  filter: blur(34.5px);
+  background: var(--background);
+  transition: opacity 0.5s;
+}
+
+/* Card content styling */
+.card-info {
+  background: #1f1a1d;
+  color: #fff9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.7rem;
+}
+
+/* Title styling */
+.card .title {
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  margin-bottom: 10px;
+  color: #fff9f9;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+/* Button styling */
+.card button {
+  position: absolute;
+  bottom: 15px; /* Ajusta a posição para ficar mais próximo da parte inferior */
+  padding: 12px 20px; /* Aumenta o tamanho dos botões */
+  border-radius: 7px;
+  border: 1px solid rgb(61, 106, 255);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: transparent;
+  color: #fff;
+  transition: all 0.2s ease-in;
+  width: 45%; /* Define a largura dos botões como 45% para que ambos tenham o mesmo tamanho */
+  white-space: nowrap; /* Impede a quebra de linha no texto */
+}
+
+/* Posiciona o botão à esquerda */
+.card button.left {
+  left: 10px; /* Alinha à esquerda */
+}
+
+/* Posiciona o botão à direita */
+.card button.right {
+  right: 10px; /* Alinha à direita */
+}
+
+/* Hover effect for buttons */
+.card button:hover {
+  background: rgb(61, 106, 255);
+  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+  transition: all 0.2s ease-out;
+}
+
+/* Hover effects for card */
+.card:hover::after {
+  opacity: 0.6;
+  top: 18px;
+  transition: 0.6s;
+}
+
+/* custom-text-size é um estilo para o título "Gestão do Estoque" */
+.custom-text-size {
+    font-size: 36px; /* Tamanho do texto do título */
+    font-weight: bolder; /* Deixa o título mais forte */
+    color: #fff; /* Cor branca */
+    text-transform: uppercase; /* Texto maiúsculo */
+    letter-spacing: 4px; /* Aumenta o espaçamento entre as letras */
+}
+
+/* custom-text-size-2 é para o subtítulo */
+.custom-text-size-2 {
+    font-size: 20px;
+    color: #ddd; /* Cor cinza claro */
+    font-weight: normal; /* Peso normal */
+    margin-top: 10px;
+}
+
+/* Hover effect for card */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarges the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 25px rgba(0, 142, 236, 0.5); /* Adds a glow shadow */
+}
+
+.card:hover::after {
+  opacity: 0.8; /* Increase the glow opacity */
+  top: 15px;
+  transition: opacity 0.6s ease, top 0.6s ease;
+}

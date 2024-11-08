@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <!--css file-->
+    <link rel="stylesheet" href="/css/sidebar.css" />
+  </head>
+  <body>
+    <div class="sidebar close" th:fragment="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-a"></i>
+        <span class="logo-name">Agrelp</span>
+      </div>
+
+      <ul class="nav-list">
+        <li>
+          <a href="/dashboard">
+            <i class="fab fa-microsoft"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="/dashboard" class="link-name">Dashboard</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-link">
+            <a href="/ferramentas">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              <span class="link-name">Ferramentas</span>
+            </a>
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li><a href="/ferramentas" class="link-name">Ferramentas</a></li>
+            <li><a href="/ferramentas/adicionar">Adicionar Ferramentas</a></li>
+			<li><a href="/ferramentas">Listar Ferramentas</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-link">
+            <a href="/maquinas">
+              <i class="fa-solid fa-tractor"></i>
+              <span class="link-name">Máquinas</span>
+            </a>
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li><a href="#" class="link-name">Máquinas</a></li>
+			<li><a href="/maquinas/adicionar">Adicionar Máquina</a></li>
+			<li><a href="/maquinas">Listar Máquinas</a></li>
+			
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-link">
+            <a href="/estoque">
+              <i class="fa-solid fa-boxes-stacked"></i>
+              <span class="link-name">Estoque</span>
+            </a>
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li><a href="/estoque" class="link-name">Estoque</a></li>
+            <li><a href="/sementes/adicionar">Adicionar Sementes</a></li>
+            <li><a href="#">Adicionar Materiais</a></li>
+            <li><a href="#">Defensivos Agrícolas</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="profile-details">
+            <div class="profile-content">
+				<img src="/images/profile.jpg" alt="Profile Image" />
+            </div>
+
+            <div class="name-job">
+              <div class="name">Pedro Gomes</div>
+              <div class="job">Front End Developer</div>
+            </div>
+            <i class="fas fa-right-to-bracket"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

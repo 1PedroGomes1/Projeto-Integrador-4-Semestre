@@ -1,0 +1,40 @@
+/* styles.css */
+.custom-text-size {
+    font-size: 30px; /* Ajuste o tamanho do texto conforme necessário */
+}
+
+.card-header {
+    font-size: 30px; /* Tamanho do texto do cabeçalho do card */
+}
+
+.texto-com-margens {
+    margin-right: 3%; /* Margem à direita para texto */
+}
+
+.custom-text-size-2 {
+    font-weight: bolder; /* Texto mais grosso */
+    font-size: 20px; /* Tamanho do texto */
+}
+
+/* Novas adições para o Dashboard */
+.container-cards {
+    display: flex; /* Ativa o Flexbox */
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    flex-wrap: wrap; /* Permite que os cards se movam para a linha seguinte se não houver espaço */
+    gap: 100px; /* Espaçamento entre os cards */
+}
+
+.card {
+    max-width: 18rem; /* Limita a largura máxima do card */
+    margin: 0 auto; /* Centraliza o card dentro da coluna */
+}
+
+/* Adicionado para mover o texto "Dashboard" */
+.dashboard-title {
+    margin-left: 55px; /* Ajuste o valor conforme necessário para mover mais ou menos */
+}
+
+/* Adicionado para mover o subtexto de "Dashboard" */
+.painel-title {
+	margin-left: 55px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Máquinas - Cards</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/cardMaquinas.css"> <!-- CSS do novo card -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+</head>
+<body class="text-white" style="background-color: #212121;">
+
+    <!-- Inclui a sidebar como fragmento -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    
+    <div class="container mt-5 ">
+        <h1 class="text-white">Lista de Máquinas - Cards</h1>
+        <div class="row mt-5">
+            <!-- Itera sobre as máquinas e cria um card para cada uma -->
+            <div class="col-md-4 mb-4" th:each="maquina : ${maquinas}">
+                <div class="card-container">
+                    <div class="card">
+                        <div class="img-content">
+                            <img th:src="${maquina.imagemUrl}" alt="Imagem da Máquina" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                        <div class="content">
+                            <p class="heading" th:text="${maquina.nome}">Nome da Máquina</p>
+                            <p>
+                                <strong>Status:</strong> <span th:text="${maquina.status}">Status</span><br>
+                                <strong>Modelo:</strong> <span th:text="${maquina.modelo}">Modelo</span><br>
+                                <strong>Ano de Fabricação:</strong> <span th:text="${maquina.anoFabricacao}">Ano</span>
+                            </p>
+							<a th:href="@{/maquinas/detalhes/{id}(id=${maquina.idMaquinas})}">
+							    <button class="left">Detalhes</button>
+							</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

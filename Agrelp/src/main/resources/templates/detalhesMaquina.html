@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes da Máquina</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/detalhesMaquina.css"> <!-- Se precisar de um CSS próprio para os detalhes -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+</head>
+<body class="" style="background-color: #212121;">
+
+    <!-- Inclui a sidebar como fragmento -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    
+	<div class="container mt-5">
+	    <h1 class="text-white">Detalhes da Máquina</h1>
+	    <div class="card mt-4">
+	        <div class="card-body">
+	            <h5 class="card-title" th:text="${maquina.nome}">Nome da Máquina</h5>
+	            <img th:src="${maquina.imagemUrl}" alt="Imagem da Máquina" class="card-img-top" />
+	            
+	            <div class="info-container">
+	                <div class="info-item">
+	                    <p><strong>Status:</strong> <span th:text="${maquina.status}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Modelo:</strong> <span th:text="${maquina.modelo}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Ano de Fabricação:</strong> <span th:text="${maquina.anoFabricacao}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Tipo de Máquina:</strong> <span th:text="${maquina.tipoMaquina}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Capacidade de Combustível:</strong> <span th:text="${maquina.capacidadeCombustivel}"></span> litros</p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Horas Trabalhadas:</strong> <span th:text="${maquina.horasTrabalhadas}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Data da Última Manutenção:</strong> <span th:text="${maquina.dataUltimaManutencao}"></span></p>
+	                </div>
+	                <div class="info-item">
+	                    <p><strong>Número de Série:</strong> <span th:text="${maquina.numeroSerie}"></span></p>
+	                </div>
+	            </div>
+
+	            <div class="divider"></div>
+	            
+	            <p><strong>Descrição:</strong> <span th:text="${maquina.descricao}"></span></p>
+	            <a href="/maquinas" class="btn btn-primary">Voltar para a Lista</a>
+	        </div>
+	    </div>
+	</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
