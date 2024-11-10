@@ -36,7 +36,7 @@ public class MaquinasController {
     public String listarMaquinas(Model model) {
         List<Maquinas> maquinas = maquinasRepository.findAll();
         model.addAttribute("maquinas", maquinas);
-        return "listaMaquinasCard"; // Retorna o nome do arquivo HTML sem a extensão
+        return "/listaMaquinasCard"; // Retorna o nome do arquivo HTML sem a extensão
     }
 
 	

@@ -26,6 +26,7 @@
 
 .card {
     max-width: 18rem; /* Limita a largura máxima do card */
+	min-width: 18rem;
     margin: 0 auto; /* Centraliza o card dentro da coluna */
 }
 

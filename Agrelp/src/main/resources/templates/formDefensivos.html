@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Ferramenta</title>
+    <title>Adicionar Defensivo</title>
     <!-- Link do CSS do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/sidebar.css">
@@ -19,21 +19,21 @@
     <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Adicionar Ferramenta</h1>
-        <form action="/ferramentas" method="post">
+        <h1 class="text-center mb-4">Adicionar Defensivo</h1>
+        <form action="/defensivos" method="post">
             <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
                         <input type="text" class="input" id="nome" name="nome" autocomplete="off" required>
-                        <label class="user-label">Nome (Ex: Martelo)</label>
+                        <label class="user-label">Nome (Ex: Herbicida)</label>
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
-                        <input type="text" class="input" id="marca" name="marca" autocomplete="off" required>
-                        <label class="user-label">Marca (Ex: Bellota)</label>
+                        <input type="text" class="input" id="categoria" name="categoria" autocomplete="off" required>
+                        <label class="user-label">Categoria (Ex: Herbicida Sistêmico)</label>
                     </div>
                 </div>
             </div>
@@ -41,24 +41,41 @@
                 <div class="col">
                     <div class="input-group">
                         <textarea class="input" id="descricao" name="descricao" autocomplete="off" required></textarea>
-                        <label class="user-label">Descrição (Ex: Usado para pregos)</label>
+                        <label class="user-label">Descrição (Ex: Usado para controle de ervas daninhas)</label>
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
-                        <input type="number" class="input" id="quantidade" name="quantidade" autocomplete="off" required>
-                        <label class="user-label">Quantidade (Ex: 4)</label>
+                        <input type="text" class="input" id="quantidade" name="quantidade" autocomplete="off" required>
+                        <label class="user-label">Quantidade (Ex: 10L, 200g)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="input" id="fabricante" name="fabricante" autocomplete="off" required>
+                        <label class="user-label">Fabricante (Ex: AgroChem)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="input" id="preco" name="preco" autocomplete="off" required>
+                        <label class="user-label">Preço (Ex: R$ 100,00)</label>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <button type="submit">
-                    <span class="text">Adicionar Ferramenta</span>
+                    <span class="text">Adicionar Defensivo</span>
                 </button>
-                <button type="button" onclick="window.location.href='/ferramentas'">
-                    <span>Lista de Ferramentas</span>
+                <!-- Alterar para type="button" para evitar submissão -->
+                <button type="button" onclick="window.location.href='/defensivos'">
+                    <span>Lista de Defensivos</span>
                 </button>
             </div>
         </form>

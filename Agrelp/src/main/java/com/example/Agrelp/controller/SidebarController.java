@@ -9,7 +9,7 @@ public class SidebarController {
 	@GetMapping("/estoque")
     public String exibirEstoque() {
         // Retorna a página que inclui o fragmento da sidebar
-        return "estoque"; // Nome do arquivo HTML (sem extensão)
+        return "/estoque"; // Nome do arquivo HTML (sem extensão)
     }
 }
 	

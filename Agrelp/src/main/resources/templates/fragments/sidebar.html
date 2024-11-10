@@ -1,97 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-    <!--css file-->
-    <link rel="stylesheet" href="/css/sidebar.css" />
-  </head>
-  <body>
-    <div class="sidebar close" th:fragment="sidebar">
-      <div class="logo">
-        <i class="fa-solid fa-a"></i>
-        <span class="logo-name">Agrelp</span>
-      </div>
+<html lang="pt-br" dir="ltr">
 
-      <ul class="nav-list">
-        <li>
-          <a href="/dashboard">
-            <i class="fab fa-microsoft"></i>
-            <span class="link-name">Dashboard</span>
-          </a>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+	<link rel="stylesheet" href="/css/sidebar.css" />
+	<title>Sidebar - Agrelp</title>
+</head>
 
-          <ul class="sub-menu blank">
-            <li><a href="/dashboard" class="link-name">Dashboard</a></li>
-          </ul>
-        </li>
+<body>
+	<div class="sidebar close " th:fragment="sidebar">
+		<div class="logo-details">
+			<i class='fas fa-seedling'></i>
+			<span class="logo_name">Agrelp</span>
+		</div>
+		<ul class="nav-links">
+			<!-- Dashboard -->
+			<li>
+				<a href="/dashboard">
+					<i class='fas fa-th-large'></i>
+					<span class="link_name">Dashboard</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="/dashboard">Dashboard</a></li>
+				</ul>
+			</li>
 
-        <li>
-          <div class="icon-link">
-            <a href="/ferramentas">
-              <i class="fa-solid fa-screwdriver-wrench"></i>
-              <span class="link-name">Ferramentas</span>
-            </a>
-            <i class="fas fa-caret-down arrow"></i>
-          </div>
+			<!-- Ferramentas -->
+			<li>
+				<div class="icon-link mt-4 mb-4">
+					<a href="/ferramentas">
+						<i class='fas fa-tools'></i>
+						<span class="link_name">Ferramentas</span>
+					</a>
+					<i class='fas fa-chevron-down arrow'></i>
+				</div>
+				<ul class="sub-menu">
+					<li><a class="link_name" href="/ferramentas">Ferramentas</a></li>
+					<li><a href="/ferramentas/adicionar">Adicionar Ferramentas</a></li>
+					<li><a href="/ferramentas">Listar Ferramentas</a></li>
+				</ul>
+			</li>
 
-          <ul class="sub-menu">
-            <li><a href="/ferramentas" class="link-name">Ferramentas</a></li>
-            <li><a href="/ferramentas/adicionar">Adicionar Ferramentas</a></li>
-			<li><a href="/ferramentas">Listar Ferramentas</a></li>
-          </ul>
-        </li>
+			<!-- Máquinas -->
+			<li>
+				<div class="icon-link mt-4 mb-4">
+					<a href="/maquinas">
+						<i class='fas fa-tractor'></i>
+						<span class="link_name">Máquinas</span>
+					</a>
+					<i class='fas fa-chevron-down arrow'></i>
+				</div>
+				<ul class="sub-menu">
+					<li><a class="link_name" href="/maquinas">Máquinas</a></li>
+					<li><a href="/maquinas/adicionar">Adicionar Máquina</a></li>
+					<li><a href="/maquinas">Listar Máquinas</a></li>
+				</ul>
+			</li>
 
-        <li>
-          <div class="icon-link">
-            <a href="/maquinas">
-              <i class="fa-solid fa-tractor"></i>
-              <span class="link-name">Máquinas</span>
-            </a>
-            <i class="fas fa-caret-down arrow"></i>
-          </div>
+			<!-- Estoque -->
+			<li>
+				<div class="icon-link mt-4 mb-4">
+					<a href="/estoque">
+						<i class='fas fa-box'></i>
+						<span class="link_name">Estoque</span>
+					</a>
+					<i class='fas fa-chevron-down arrow'></i>
+				</div>
+				<ul class="sub-menu">
+					<li><a class="link_name" href="/estoque">Estoque</a></li>
+					<li><a href="/sementes/adicionar">Adicionar Sementes</a></li>
+					<li><a href="/materiais/adicionar">Adicionar Materiais</a></li>
+					<li><a href="/defensivos/adicionar">Defensivos Agrícolas</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 
-          <ul class="sub-menu">
-            <li><a href="#" class="link-name">Máquinas</a></li>
-			<li><a href="/maquinas/adicionar">Adicionar Máquina</a></li>
-			<li><a href="/maquinas">Listar Máquinas</a></li>
-			
-          </ul>
-        </li>
+	<section class="home-section">
+		<div class="home-content">
+			<i class='fas fa-bars'></i>
+			<span class="text">Menu de Navegação</span>
+		</div>
+	</section>
 
-        <li>
-          <div class="icon-link">
-            <a href="/estoque">
-              <i class="fa-solid fa-boxes-stacked"></i>
-              <span class="link-name">Estoque</span>
-            </a>
-            <i class="fas fa-caret-down arrow"></i>
-          </div>
+	<script>
+		let arrow = document.querySelectorAll(".arrow");
+		for (let i = 0; i < arrow.length; i++) {
+			arrow[i].addEventListener("click", (e) => {
+				let arrowParent = e.target.parentElement.parentElement;
+				arrowParent.classList.toggle("showMenu");
+			});
+		}
+		let sidebar = document.querySelector(".sidebar");
+		let sidebarBtn = document.querySelector(".fa-bars");
+		sidebarBtn.addEventListener("click", () => {
+			sidebar.classList.toggle("close");
+		});
+	</script>
+</body>
 
-          <ul class="sub-menu">
-            <li><a href="/estoque" class="link-name">Estoque</a></li>
-            <li><a href="/sementes/adicionar">Adicionar Sementes</a></li>
-            <li><a href="#">Adicionar Materiais</a></li>
-            <li><a href="#">Defensivos Agrícolas</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <div class="profile-details">
-            <div class="profile-content">
-				<img src="/images/profile.jpg" alt="Profile Image" />
-            </div>
-
-            <div class="name-job">
-              <div class="name">Pedro Gomes</div>
-              <div class="job">Front End Developer</div>
-            </div>
-            <i class="fas fa-right-to-bracket"></i>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </body>
 </html>
