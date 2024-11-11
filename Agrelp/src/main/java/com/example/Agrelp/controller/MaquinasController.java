@@ -79,7 +79,7 @@ public class MaquinasController {
 
     // Método para exibir o formulário de edição
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Optional<Maquinas> maquinaOptional = maquinasRepository.findById(id);
         if (maquinaOptional.isPresent()) {
             model.addAttribute("maquina", maquinaOptional.get());
@@ -91,7 +91,7 @@ public class MaquinasController {
 
     // Método para salvar as alterações da edição
     @PostMapping("/editar/{id}")
-    public String atualizarMaquina(@PathVariable("id") Long id, @ModelAttribute Maquinas maquinaAtualizada, @RequestParam("imagem") MultipartFile file) {
+    public String atualizarMaquina(@PathVariable Long id, @ModelAttribute Maquinas maquinaAtualizada, @RequestParam("imagem") MultipartFile file) {
         Optional<Maquinas> maquinaOptional = maquinasRepository.findById(id);
         if (maquinaOptional.isPresent()) {
             Maquinas maquinaExistente = maquinaOptional.get();
@@ -135,8 +135,26 @@ public class MaquinasController {
 
     // Método para deletar uma máquina
     @GetMapping("/deletar/{id}")
-    public String deletarMaquina(@PathVariable("id") Long id) {
+    public String deletarMaquina(@PathVariable Long id) {
         maquinasRepository.deleteById(id);
         return "redirect:/maquinas"; // Redireciona para a lista após deletar
     }
+    
+ // Método para buscar ferramentas por nome
+    @GetMapping("/buscar")
+    public String buscarMaquinas(@RequestParam(required = false) String nome, Model model) {
+        List<Maquinas> maquinas;
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            // Retorna todas as ferramentas se o campo estiver vazio
+        	maquinas = maquinasRepository.findAll();
+        } else {
+            // Realiza a busca pelo nome
+        	maquinas = maquinasRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        
+        model.addAttribute("maquinas", maquinas);
+        return "listaMaquinasCard"; // Exibe a lista (completa ou filtrada)
+    }
+    
 }

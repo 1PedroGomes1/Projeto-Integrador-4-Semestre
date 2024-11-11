@@ -40,7 +40,7 @@ public class MateriaisController {
 
     // Exibir o formulário para editar um material
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Optional<Materiais> materialOptional = materiaisRepository.findById(id);
         if (materialOptional.isPresent()) {
             model.addAttribute("material", materialOptional.get());
@@ -52,7 +52,7 @@ public class MateriaisController {
 
     // Atualizar um material
     @PostMapping("/editar/{id}")
-    public String atualizarMaterial(@PathVariable("id") Long id, @ModelAttribute Materiais materialAtualizado) {
+    public String atualizarMaterial(@PathVariable Long id, @ModelAttribute Materiais materialAtualizado) {
         Optional<Materiais> materialOptional = materiaisRepository.findById(id);
         if (materialOptional.isPresent()) {
             Materiais materialExistente = materialOptional.get();
@@ -68,8 +68,26 @@ public class MateriaisController {
 
     // Deletar um material
     @GetMapping("/deletar/{id}")
-    public String deletarMaterial(@PathVariable("id") Long id) {
+    public String deletarMaterial(@PathVariable Long id) {
         materiaisRepository.deleteById(id);
         return "redirect:/materiais"; // Redireciona para a página de listagem após deletar
     }
+    
+ // Método para buscar ferramentas por nome
+    @GetMapping("/buscar")
+    public String buscarMateriais(@RequestParam(required = false) String nome, Model model) {
+        List<Materiais> materiais;
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            // Retorna todas as ferramentas se o campo estiver vazio
+        	materiais = materiaisRepository.findAll();
+        } else {
+            // Realiza a busca pelo nome
+        	materiais = materiaisRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        
+        model.addAttribute("materiais", materiais);
+        return "listarMateriais"; // Exibe a lista (completa ou filtrada)
+    }
+    
 }

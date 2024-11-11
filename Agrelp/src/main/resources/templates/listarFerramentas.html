@@ -24,9 +24,7 @@
 	<div class="container mt-5">
 		<h1>Lista de Ferramentas</h1>
 
-
-
-		<form action="/ferramentas/buscar" method="get">
+		<form action="/ferramentas/buscar" method="get" class="mt-4">
 			<div class="galaxy"></div>
 			<div id="search-container">
 				<div class="nebula"></div>
@@ -62,10 +60,12 @@
 			<button2 type="submit"></button2>
 		</form>
 
+		
+		<hr class="mt-1">
 		<!-- Cards de ferramentas -->
 		<div class="row">
-			<div class="col-md-3 col-sm-6 mb-5" th:each="ferramenta, iterStat : ${ferramentas}">
-				<div class="card text-white bg-dark shadow-lg" style="border-radius: 15px; overflow: hidden;">
+			<div class="col-md-4 col-sm-6 mb-4" th:each="ferramenta, iterStat : ${ferramentas}">
+				<div class="card text-white shadow-lg" style="border-radius: 15px; overflow: hidden;">
 					<div class="card-body">
 						<h5 class="card-title" th:text="${ferramenta.nome}"></h5>
 						<p class="card-text"><strong style="color: yellow;">Descrição:</strong> <span th:text="${ferramenta.descricao}"></span></p>

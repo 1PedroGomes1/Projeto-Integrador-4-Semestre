@@ -1,5 +1,7 @@
 package com.example.Agrelp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Agrelp.model.Sementes;
 import com.example.Agrelp.repository.SementesRepository;
@@ -55,8 +58,26 @@ public class SementesController {
 
     // Método para deletar uma semente
     @GetMapping("/deletar/{id}")
-    public String deletarSemente(@PathVariable("id") Long id) {
+    public String deletarSemente(@PathVariable Long id) {
         sementesRepository.deleteById(id);
         return "redirect:/sementes"; // Redireciona para a lista após deletar
     }
+    
+ // Método para buscar ferramentas por nome
+    @GetMapping("/buscar")
+    public String buscarSementes(@RequestParam(required = false) String nome, Model model) {
+        List<Sementes> sementes;
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            // Retorna todas as ferramentas se o campo estiver vazio
+        	sementes = sementesRepository.findAll();
+        } else {
+            // Realiza a busca pelo nome
+        	sementes = sementesRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        
+        model.addAttribute("sementes", sementes);
+        return "listarSementes"; // Exibe a lista (completa ou filtrada)
+    }
+    
 }

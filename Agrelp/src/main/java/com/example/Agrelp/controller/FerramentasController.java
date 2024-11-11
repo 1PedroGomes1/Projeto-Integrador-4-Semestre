@@ -37,7 +37,7 @@ public class FerramentasController {
 
     // Método para exibir o formulário de edição
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Optional<Ferramentas> ferramentaOptional = ferramentasRepository.findById(id);
         if (ferramentaOptional.isPresent()) {
             model.addAttribute("ferramenta", ferramentaOptional.get());
@@ -49,7 +49,7 @@ public class FerramentasController {
 
     // Método para salvar as alterações da edição
     @PostMapping("/editar/{id}")
-    public String atualizarFerramenta(@PathVariable("id") Long id, @ModelAttribute Ferramentas ferramentaAtualizada) {
+    public String atualizarFerramenta(@PathVariable Long id, @ModelAttribute Ferramentas ferramentaAtualizada) {
         Optional<Ferramentas> ferramentaOptional = ferramentasRepository.findById(id);
         if (ferramentaOptional.isPresent()) {
             Ferramentas ferramentaExistente = ferramentaOptional.get();
@@ -65,14 +65,14 @@ public class FerramentasController {
 
     // Método para deletar uma ferramenta
     @GetMapping("/deletar/{id}")
-    public String deletarFerramenta(@PathVariable("id") Long id) {
+    public String deletarFerramenta(@PathVariable Long id) {
         ferramentasRepository.deleteById(id);
         return "redirect:/ferramentas"; // Redireciona para a lista após deletar
     }
 
     // Método para buscar ferramentas por nome
     @GetMapping("/buscar")
-    public String buscarFerramentas(@RequestParam(value = "nome", required = false) String nome, Model model) {
+    public String buscarFerramentas(@RequestParam(required = false) String nome, Model model) {
         List<Ferramentas> ferramentas;
         
         if (nome == null || nome.trim().isEmpty()) {

@@ -25,11 +25,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 25px;
+	box-shadow: #ffff;
 }
 
 .card-title {
-    color: #00acc1;
-    font-size: 1.8rem;
+    color: #06F3AF;
+    font-size: 2.30rem;
     text-align: center;
 }
 
@@ -63,7 +64,7 @@ body {
 .info-item p,
 .card-body > p {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     color: #ddd; /* Altera a cor da descrição para ser igual às outras informações */
 }
 

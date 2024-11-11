@@ -36,7 +36,7 @@ public class DefensivosController {
     }
 
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Optional<Defensivos> defensivoOptional = defensivosRepository.findById(id);
         if (defensivoOptional.isPresent()) {
             model.addAttribute("defensivo", defensivoOptional.get()); // Passa o defensivo para edição
@@ -47,7 +47,7 @@ public class DefensivosController {
     }
 
     @PostMapping("/editar/{id}")
-    public String atualizarDefensivo(@PathVariable("id") Long id, @ModelAttribute Defensivos defensivoAtualizado) {
+    public String atualizarDefensivo(@PathVariable Long id, @ModelAttribute Defensivos defensivoAtualizado) {
         Optional<Defensivos> defensivoOptional = defensivosRepository.findById(id);
         if (defensivoOptional.isPresent()) {
             Defensivos defensivoExistente = defensivoOptional.get();
@@ -63,8 +63,26 @@ public class DefensivosController {
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarDefensivo(@PathVariable("id") Long id) {
+    public String deletarDefensivo(@PathVariable Long id) {
         defensivosRepository.deleteById(id); // Deleta o defensivo
         return "redirect:/defensivos"; // Redireciona para a lista de defensivos
     }
+    
+ // Método para buscar ferramentas por nome
+    @GetMapping("/buscar")
+    public String buscarDefensivos(@RequestParam(required = false) String nome, Model model) {
+        List<Defensivos> defensivos;
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            // Retorna todas as ferramentas se o campo estiver vazio
+            defensivos = defensivosRepository.findAll();
+        } else {
+            // Realiza a busca pelo nome
+        	defensivos = defensivosRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        
+        model.addAttribute("defensivos", defensivos);
+        return "listarDefensivos"; // Exibe a lista (completa ou filtrada)
+    }
+    
 }

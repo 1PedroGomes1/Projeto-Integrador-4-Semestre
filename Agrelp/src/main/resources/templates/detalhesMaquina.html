@@ -21,9 +21,10 @@
 
 	<div class="container mt-5">
 		<h1 class="text-white">Detalhes da Máquina</h1>
-		<div class="card mt-4">
+		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title" th:text="${maquina.nome}">Nome da Máquina</h5>
+				<h5 class="my-1 card-title" th:text="${maquina.nome}">Nome da Máquina</h5>
+				<div class="divider my-1"></div>
 				<img th:src="${maquina.imagemUrl}" alt="Imagem da Máquina" class="card-img-top" />
 
 				<div class="info-container mt-3">
