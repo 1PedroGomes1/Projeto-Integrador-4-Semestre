@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,57 +25,118 @@ import com.example.Agrelp.repository.MaquinasRepository;
 @RequestMapping("/maquinas")
 public class MaquinasController {
 
-	@Autowired
-	private MaquinasRepository maquinasRepository;
-	
-	@GetMapping("/adicionar")
+    @Autowired
+    private MaquinasRepository maquinasRepository;
+
+    @GetMapping("/adicionar")
     public String mostrarFormulario() {
         return "formMaquinas"; // Retorna o nome do arquivo HTML sem a extensão
     }
-	
-	@GetMapping
+
+    @GetMapping
     public String listarMaquinas(Model model) {
         List<Maquinas> maquinas = maquinasRepository.findAll();
         model.addAttribute("maquinas", maquinas);
-        return "/listaMaquinasCard"; // Retorna o nome do arquivo HTML sem a extensão
+        return "listaMaquinasCard"; // Retorna o nome do arquivo HTML sem a extensão
     }
 
-	
-	@PostMapping
-	public String adicionarMaquina(@ModelAttribute Maquinas maquinas, @RequestParam("imagem") MultipartFile file) {
-	    if (!file.isEmpty()) {
-	        try {
-	            // Verifica se o diretório uploads existe, se não existir, cria
-	        	File uploadsDir = new File("src/main/resources/static/uploads");
-	            if (!uploadsDir.exists()) {
-	                uploadsDir.mkdirs(); // Cria o diretório
-	            }
+    @PostMapping
+    public String adicionarMaquina(@ModelAttribute Maquinas maquinas, @RequestParam("imagem") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                // Verifica se o diretório uploads existe, se não existir, cria
+                File uploadsDir = new File("src/main/resources/static/uploads");
+                if (!uploadsDir.exists()) {
+                    uploadsDir.mkdirs(); // Cria o diretório
+                }
 
-	            // Salva a imagem
-	            byte[] bytes = file.getBytes();
-	            Path path = Paths.get(uploadsDir.getAbsolutePath(), file.getOriginalFilename());
-	            Files.write(path, bytes);
+                // Salva a imagem
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(uploadsDir.getAbsolutePath(), file.getOriginalFilename());
+                Files.write(path, bytes);
 
-	            // Salva o caminho da imagem no banco de dados
-	            maquinas.setImagemUrl("/uploads/" + file.getOriginalFilename());
-	        } catch (Exception e) {
-	            e.printStackTrace(); // Imprime o stack trace para depuração
-	            return "redirect:/maquinas/adicionar"; // Redireciona em caso de erro
-	        }
-	    }
+                // Salva o caminho da imagem no banco de dados
+                maquinas.setImagemUrl("/uploads/" + file.getOriginalFilename());
+            } catch (Exception e) {
+                e.printStackTrace(); // Imprime o stack trace para depuração
+                return "redirect:/maquinas/adicionar"; // Redireciona em caso de erro
+            }
+        }
 
-	    maquinasRepository.save(maquinas); // Salva a máquina no banco de dados
-	    return "redirect:/maquinas"; // Redireciona após sucesso
-	}
+        maquinasRepository.save(maquinas); // Salva a máquina no banco de dados
+        return "redirect:/maquinas"; // Redireciona após sucesso
+    }
 
-	
-	@GetMapping("/detalhes/{id}")
-	public String mostrarDetalhes(@PathVariable Long id, Model model) {
-	    Maquinas maquina = maquinasRepository.findById(id).orElse(null);
-	    if (maquina != null) {
-	        model.addAttribute("maquina", maquina);
-	        return "detalhesMaquina"; // Página que exibe os detalhes
-	    }
-	    return "redirect:/maquinas"; // Redireciona caso a máquina não seja encontrada
-	}
+    @GetMapping("/detalhes/{id}")
+    public String mostrarDetalhes(@PathVariable Long id, Model model) {
+        Maquinas maquina = maquinasRepository.findById(id).orElse(null);
+        if (maquina != null) {
+            model.addAttribute("maquina", maquina);
+            return "detalhesMaquina"; // Página que exibe os detalhes
+        }
+        return "redirect:/maquinas"; // Redireciona caso a máquina não seja encontrada
+    }
+
+    // Método para exibir o formulário de edição
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model) {
+        Optional<Maquinas> maquinaOptional = maquinasRepository.findById(id);
+        if (maquinaOptional.isPresent()) {
+            model.addAttribute("maquina", maquinaOptional.get());
+            return "editarMaquinas"; // Reutiliza o formulário para edição
+        } else {
+            return "redirect:/maquinas"; // Redireciona se o ID não for encontrado
+        }
+    }
+
+    // Método para salvar as alterações da edição
+    @PostMapping("/editar/{id}")
+    public String atualizarMaquina(@PathVariable("id") Long id, @ModelAttribute Maquinas maquinaAtualizada, @RequestParam("imagem") MultipartFile file) {
+        Optional<Maquinas> maquinaOptional = maquinasRepository.findById(id);
+        if (maquinaOptional.isPresent()) {
+            Maquinas maquinaExistente = maquinaOptional.get();
+            // Atualiza os dados
+            maquinaExistente.setNome(maquinaAtualizada.getNome());
+            maquinaExistente.setModelo(maquinaAtualizada.getModelo());
+            maquinaExistente.setAnoFabricacao(maquinaAtualizada.getAnoFabricacao());
+            maquinaExistente.setTipoMaquina(maquinaAtualizada.getTipoMaquina());
+            maquinaExistente.setCapacidadeCombustivel(maquinaAtualizada.getCapacidadeCombustivel());
+            maquinaExistente.setHorasTrabalhadas(maquinaAtualizada.getHorasTrabalhadas());
+            maquinaExistente.setDataUltimaManutencao(maquinaAtualizada.getDataUltimaManutencao());
+            maquinaExistente.setNumeroSerie(maquinaAtualizada.getNumeroSerie());
+            maquinaExistente.setDescricao(maquinaAtualizada.getDescricao());
+
+            // Se uma nova imagem foi enviada
+            if (!file.isEmpty()) {
+                try {
+                    // Verifica se o diretório uploads existe, se não existir, cria
+                    File uploadsDir = new File("src/main/resources/static/uploads");
+                    if (!uploadsDir.exists()) {
+                        uploadsDir.mkdirs(); // Cria o diretório
+                    }
+
+                    // Salva a nova imagem
+                    byte[] bytes = file.getBytes();
+                    Path path = Paths.get(uploadsDir.getAbsolutePath(), file.getOriginalFilename());
+                    Files.write(path, bytes);
+
+                    // Atualiza o caminho da imagem
+                    maquinaExistente.setImagemUrl("/uploads/" + file.getOriginalFilename());
+                } catch (Exception e) {
+                    e.printStackTrace(); // Imprime o stack trace para depuração
+                    return "redirect:/maquinas/editar/" + id; // Redireciona em caso de erro
+                }
+            }
+
+            maquinasRepository.save(maquinaExistente); // Salva as alterações no banco de dados
+        }
+        return "redirect:/maquinas"; // Redireciona após sucesso
+    }
+
+    // Método para deletar uma máquina
+    @GetMapping("/deletar/{id}")
+    public String deletarMaquina(@PathVariable("id") Long id) {
+        maquinasRepository.deleteById(id);
+        return "redirect:/maquinas"; // Redireciona para a lista após deletar
+    }
 }

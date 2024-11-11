@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Adicionar Máquina</title>
+	<title>Editar Máquina</title>
 	<!-- Link do CSS do Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/sidebar.css">
@@ -20,18 +20,24 @@
 	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
 	<div class="container mt-5">
-		<h1 class="text-center mb-4">Adicionar Máquina</h1>
-		<form action="/maquinas" method="post" enctype="multipart/form-data">
+		<h1 class="text-center mb-4">Editar Máquina</h1>
+		<form th:action="@{/maquinas/editar/{id}(id=${maquina.idMaquinas})}" method="post"
+			enctype="multipart/form-data">
+			<!-- Alterado de maquina.id para maquina.idMaquinas -->
+			<input type="hidden" th:value="${maquina.idMaquinas}" name="idMaquinas">
+
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="input" id="nome" name="nome" autocomplete="off" required>
+						<input type="text" class="input" id="nome" name="nome" th:value="${maquina.nome}"
+							autocomplete="off" required>
 						<label class="user-label">Nome da Máquina</label>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="input" id="status" name="status" autocomplete="off" required>
+						<input type="text" class="input" id="status" name="status" th:value="${maquina.status}"
+							autocomplete="off" required>
 						<label class="user-label">Status da Máquina</label>
 					</div>
 				</div>
@@ -40,14 +46,15 @@
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="input" id="modelo" name="modelo" autocomplete="off" required>
+						<input type="text" class="input" id="modelo" name="modelo" th:value="${maquina.modelo}"
+							autocomplete="off" required>
 						<label class="user-label">Modelo e Marca</label>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="number" class="input" id="anoFabricacao" name="anoFabricacao" autocomplete="off"
-							required>
+						<input type="number" class="input" id="anoFabricacao" name="anoFabricacao"
+							th:value="${maquina.anoFabricacao}" autocomplete="off" required>
 						<label class="user-label">Ano de Fabricação</label>
 					</div>
 				</div>
@@ -56,15 +63,15 @@
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="input" id="tipoMaquina" name="tipoMaquina" autocomplete="off"
-							required>
+						<input type="text" class="input" id="tipoMaquina" name="tipoMaquina"
+							th:value="${maquina.tipoMaquina}" autocomplete="off" required>
 						<label class="user-label">Tipo de Máquina</label>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="input-group">
 						<input type="number" class="input" id="capacidadeCombustivel" name="capacidadeCombustivel"
-							step="0.1" autocomplete="off" required>
+							th:value="${maquina.capacidadeCombustivel}" step="0.1" autocomplete="off" required>
 						<label class="user-label">Capacidade de Combustível (litros)</label>
 					</div>
 				</div>
@@ -74,14 +81,14 @@
 				<div class="col-md-6">
 					<div class="input-group">
 						<input type="number" class="input" id="horasTrabalhadas" name="horasTrabalhadas"
-							autocomplete="off" required>
+							th:value="${maquina.horasTrabalhadas}" autocomplete="off" required>
 						<label class="user-label">Horas Trabalhadas</label>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="input-group">
 						<input type="date" class="input" id="dataUltimaManutencao" name="dataUltimaManutencao"
-							autocomplete="off" required>
+							th:value="${maquina.dataUltimaManutencao}" autocomplete="off" required>
 						<label class="user-label">Data da Última Manutenção</label>
 					</div>
 				</div>
@@ -90,7 +97,8 @@
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<textarea class="input" id="descricao" name="descricao" autocomplete="off" required></textarea>
+						<textarea class="input" id="descricao" name="descricao" autocomplete="off" required
+							th:text="${maquina.descricao}"></textarea>
 						<label class="user-label">Descrição</label>
 					</div>
 				</div>
@@ -99,8 +107,8 @@
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="input" id="numeroSerie" name="numeroSerie" autocomplete="off"
-							required>
+						<input type="text" class="input" id="numeroSerie" name="numeroSerie"
+							th:value="${maquina.numeroSerie}" autocomplete="off" required>
 						<label class="user-label">Número de Série</label>
 					</div>
 				</div>
@@ -112,14 +120,22 @@
 						<div class="text">
 							<span>Clique para colocar a imagem</span>
 						</div>
-						<input id="file" type="file" name="imagem" accept="image/*" required onchange="showFileName()">
+						<input id="file" type="file" name="imagem" accept="image/*" onchange="showFileName()">
 					</label>
 				</div>
 			</div>
 
+			<!-- Exibe a imagem atual, caso exista -->
+			<div class="mb-3">
+				<p><strong>Imagem Atual:</strong></p>
+				<!-- Verifica se a máquina tem uma imagem associada -->
+				<img th:if="${maquina.imagemUrl}" th:src="@{${maquina.imagemUrl}}" alt="Imagem da Máquina"
+					class="img-fluid" style="max-width: 200px;">
+			</div>
+
 			<div class="d-flex justify-content-between mb-2">
-				<button type="submit" onclick="return confirm('Tem certeza que deseja adicionar esta Máquina?');">
-					<span class="text">Adicionar Máquina</span>
+				<button type="submit" onclick="return confirm('Tem certeza que deseja atualizar esta Máquina?');">
+					<span class="text">Salvar Alterações</span>
 				</button>
 				<button type="button" onclick="window.location.href='/maquinas'">
 					<span>Lista de Máquinas</span>

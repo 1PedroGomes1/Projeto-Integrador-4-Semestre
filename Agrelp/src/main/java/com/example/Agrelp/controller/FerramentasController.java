@@ -69,4 +69,23 @@ public class FerramentasController {
         ferramentasRepository.deleteById(id);
         return "redirect:/ferramentas"; // Redireciona para a lista após deletar
     }
+
+    // Método para buscar ferramentas por nome
+    @GetMapping("/buscar")
+    public String buscarFerramentas(@RequestParam(value = "nome", required = false) String nome, Model model) {
+        List<Ferramentas> ferramentas;
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            // Retorna todas as ferramentas se o campo estiver vazio
+            ferramentas = ferramentasRepository.findAll();
+        } else {
+            // Realiza a busca pelo nome
+            ferramentas = ferramentasRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        
+        model.addAttribute("ferramentas", ferramentas);
+        return "listarFerramentas"; // Exibe a lista (completa ou filtrada)
+    }
+
+
 }

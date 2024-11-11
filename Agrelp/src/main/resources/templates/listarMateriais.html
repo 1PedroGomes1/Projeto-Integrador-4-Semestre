@@ -9,6 +9,7 @@
     <!-- Link do CSS da Sidebar -->                                 
     <link rel="stylesheet" href="/css/sidebar.css">
 	<link rel="stylesheet" href="/css/button.css">
+	<link rel="stylesheet" href="/css/button2.css">
 	<link rel="stylesheet" href="/css/listarFerramentas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
@@ -38,14 +39,14 @@
                     <td th:text="${material.categoria}"></td>
                     <td th:text="${material.descricao}"></td>
                     <td th:text="${material.quantidade}"></td>
-                    <td>
-                        <a th:href="@{/materiais/editar/{id}(id=${material.id})}" class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i> Editar
-                        </a>
-                        <a th:href="@{/materiais/deletar/{id}(id=${material.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este material?');">
-                            <i class="fas fa-trash-alt"></i> Deletar
-                        </a>
-                    </td>
+					<td>
+					    <a th:href="@{/materiais/editar/{id}(id=${material.id})}" class="btn btn-warning btn-sm mb-2" onclick="return confirm('Tem certeza que deseja editar este material?');">
+					        <i class="fas fa-edit"></i>
+					    </a>
+					    <a th:href="@{/materiais/deletar/{id}(id=${material.id})}" class="btn btn-danger btn-sm mb-2" onclick="return confirm('Tem certeza que deseja deletar este material?');">
+					        <i class="fas fa-trash-alt"></i>
+					    </a>
+					</td>
                 </tr>
             </tbody>
         </table>

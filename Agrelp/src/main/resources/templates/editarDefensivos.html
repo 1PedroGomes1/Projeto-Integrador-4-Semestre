@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Editar Semente</title>
+	<title>Editar Defensivo</title>
 	<!-- Link do CSS do Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/sidebar.css">
@@ -19,39 +19,39 @@
 	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
 	<div class="container mt-5">
-		<h1 class="text-center mb-4">Editar Semente</h1>
-		<form th:action="@{/sementes/editar/{id}(id=${semente.id})}" method="post">
-			<input type="hidden" th:value="${semente.id}" name="id" />
+		<h1 class="text-center mb-4">Editar Defensivo</h1>
+		<form th:action="@{/defensivos/editar/{id}(id=${defensivo.id})}" method="post">
+			<input type="hidden" th:value="${defensivo.id}" name="id" />
 
 			<!-- Nome -->
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<input type="text" class="input" id="nome" name="nome" th:value="${semente.nome}"
+						<input type="text" class="input" id="nome" name="nome" th:value="${defensivo.nome}"
 							autocomplete="off" required>
-						<label class="user-label">Nome (Ex: Semente de Milho)</label>
+						<label class="user-label">Nome (Ex: Glifosato)</label>
 					</div>
 				</div>
 			</div>
 
-			<!-- Data de Colheita -->
+			<!-- Categoria -->
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<input type="date" class="input" id="dataColheita" name="dataColheita"
-							th:value="${semente.dataColheita}" autocomplete="off" required>
-						<label class="user-label">Data de Colheita</label>
+						<input type="text" class="input" id="categoria" name="categoria"
+							th:value="${defensivo.categoria}" autocomplete="off" required>
+						<label class="user-label">Categoria (Ex: Herbicida)</label>
 					</div>
 				</div>
 			</div>
 
-			<!-- Data de Validade -->
+			<!-- Descrição -->
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<input type="date" class="input" id="dataValidade" name="dataValidade"
-							th:value="${semente.dataValidade}" autocomplete="off" required>
-						<label class="user-label">Data de Validade</label>
+						<textarea class="input" id="descricao" name="descricao" autocomplete="off" required
+							th:text="${defensivo.descricao}"></textarea>
+						<label class="user-label">Descrição (Ex: Combate a plantas daninhas)</label>
 					</div>
 				</div>
 			</div>
@@ -60,31 +60,31 @@
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<input type="number" class="input" id="quantidade" name="quantidade"
-							th:value="${semente.quantidade}" autocomplete="off" required>
-						<label class="user-label">Quantidade (Ex: 10 sacos)</label>
+						<input type="text" class="input" id="quantidade" name="quantidade"
+							th:value="${defensivo.quantidade}" autocomplete="off" required>
+						<label class="user-label">Quantidade (Ex: 10 Litros)</label>
 					</div>
 				</div>
 			</div>
 
-			<!-- Condições de Armazenamento -->
+			<!-- Fabricante -->
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<textarea class="input" id="condicoesArmazenamento" name="condicoesArmazenamento"
-							autocomplete="off" required th:text="${semente.condicoesArmazenamento}"></textarea>
-						<label class="user-label">Condições de Armazenamento</label>
+						<input type="text" class="input" id="fabricante" name="fabricante"
+							th:value="${defensivo.fabricante}" autocomplete="off" required>
+						<label class="user-label">Fabricante (Ex: Syngenta)</label>
 					</div>
 				</div>
 			</div>
 
-			<!-- Produtor/Fabricante -->
+			<!-- Preço -->
 			<div class="row mb-3">
 				<div class="col">
 					<div class="input-group">
-						<input type="text" class="input" id="produtorFabricante" name="produtorFabricante"
-							th:value="${semente.produtorFabricante}" autocomplete="off" required>
-						<label class="user-label">Produtor/Fabricante</label>
+						<input type="text" class="input" id="preco" name="preco" th:value="${defensivo.preco}"
+							autocomplete="off" required>
+						<label class="user-label">Preço (Ex: R$ 200,00)</label>
 					</div>
 				</div>
 			</div>
@@ -93,8 +93,8 @@
 				<button type="submit" onclick="return confirm('Tem certeza que deseja salvar as alterações?');">
 					<span class="text">Salvar Alterações</span>
 				</button>
-				<button type="button" onclick="window.location.href='/sementes'">
-					<span>Lista de Sementes</span>
+				<button type="button" onclick="window.location.href='/defensivos'">
+					<span>Lista de Defensivos</span>
 				</button>
 			</div>
 		</form>

@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.Date;
 
+import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,12 +26,12 @@ public class Maquinas {
     private int horasTrabalhadas;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dataUltimaManutencao;
+    private LocalDate dataUltimaManutencao;
     private String descricao;
     private String numeroSerie;
 
     public Maquinas(Long idMaquinas, String nome, String status, String modelo, int anoFabricacao, String imagemUrl,
-                    String tipoMaquina, double capacidadeCombustivel, int horasTrabalhadas, Date dataUltimaManutencao,
+                    String tipoMaquina, double capacidadeCombustivel, int horasTrabalhadas, LocalDate dataUltimaManutencao,
                     String descricao, String numeroSerie) {
         super();
         this.idMaquinas = idMaquinas;
@@ -126,11 +126,11 @@ public class Maquinas {
         this.horasTrabalhadas = horasTrabalhadas;
     }
 
-    public Date getDataUltimaManutencao() {
+    public LocalDate getDataUltimaManutencao() {
         return dataUltimaManutencao;
     }
 
-    public void setDataUltimaManutencao(Date dataUltimaManutencao) {
+    public void setDataUltimaManutencao(LocalDate dataUltimaManutencao) {
         this.dataUltimaManutencao = dataUltimaManutencao;
     }
 
