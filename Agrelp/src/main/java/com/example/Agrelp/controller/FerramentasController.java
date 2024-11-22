@@ -26,9 +26,16 @@ public class FerramentasController {
     public String listarFerramentas(Model model) {
         List<Ferramentas> ferramentas = ferramentasRepository.findAll();
         model.addAttribute("ferramentas", ferramentas);
-        return "listarFerramentas";
+        return "listarFerramentasTabelas";
     }
 
+    @GetMapping("/cards")
+    public String listarFerramentasTabelas(Model model) {
+        List<Ferramentas> ferramentas = ferramentasRepository.findAll();
+        model.addAttribute("ferramentas", ferramentas);
+        return "listarFerramentas";
+    }
+    
     @PostMapping
     public String adicionarFerramenta(@ModelAttribute Ferramentas ferramentas) {
         ferramentasRepository.save(ferramentas);
@@ -72,9 +79,13 @@ public class FerramentasController {
 
     // Método para buscar ferramentas por nome
     @GetMapping("/buscar")
-    public String buscarFerramentas(@RequestParam(required = false) String nome, Model model) {
-        List<Ferramentas> ferramentas;
+    public String buscarFerramentas(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false, defaultValue = "cards") String formato,
+            Model model) {
         
+        List<Ferramentas> ferramentas;
+
         if (nome == null || nome.trim().isEmpty()) {
             // Retorna todas as ferramentas se o campo estiver vazio
             ferramentas = ferramentasRepository.findAll();
@@ -82,10 +93,15 @@ public class FerramentasController {
             // Realiza a busca pelo nome
             ferramentas = ferramentasRepository.findByNomeContainingIgnoreCase(nome);
         }
-        
+
         model.addAttribute("ferramentas", ferramentas);
-        return "listarFerramentas"; // Exibe a lista (completa ou filtrada)
+
+        // Retorna o template correto com base no formato solicitado
+        if ("tabelas".equalsIgnoreCase(formato)) {
+            return "listarFerramentasTabelas";
+        } else {
+            return "listarFerramentas";
+        }
     }
-
-
+    
 }

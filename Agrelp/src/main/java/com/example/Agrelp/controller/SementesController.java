@@ -33,12 +33,18 @@ public class SementesController {
         return "redirect:/sementes"; // Redireciona após sucesso
     }
 
-    @GetMapping
+    @GetMapping("/cards")
     public String listarSementes(Model model) {
         model.addAttribute("sementes", sementesRepository.findAll());
         return "listarSementes"; // Retorna o nome do arquivo HTML sem a extensão
     }
 
+    @GetMapping
+    public String listarSementesTabelas(Model model) {
+        model.addAttribute("sementes", sementesRepository.findAll());
+        return "listarSementesTabelas"; // Retorna o nome do arquivo HTML sem a extensão
+    }
+    
     // Método para mostrar o formulário de edição
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
@@ -63,21 +69,32 @@ public class SementesController {
         return "redirect:/sementes"; // Redireciona para a lista após deletar
     }
     
- // Método para buscar ferramentas por nome
+ // Método para buscar sementes por nome
     @GetMapping("/buscar")
-    public String buscarSementes(@RequestParam(required = false) String nome, Model model) {
-        List<Sementes> sementes;
+    public String buscarSementes(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false, defaultValue = "cards") String formato,
+            Model model) {
         
+        List<Sementes> sementes;
+
         if (nome == null || nome.trim().isEmpty()) {
-            // Retorna todas as ferramentas se o campo estiver vazio
-        	sementes = sementesRepository.findAll();
+            // Retorna todas as sementes se o campo estiver vazio
+            sementes = sementesRepository.findAll();
         } else {
             // Realiza a busca pelo nome
-        	sementes = sementesRepository.findByNomeContainingIgnoreCase(nome);
+            sementes = sementesRepository.findByNomeContainingIgnoreCase(nome);
         }
-        
+
         model.addAttribute("sementes", sementes);
-        return "listarSementes"; // Exibe a lista (completa ou filtrada)
+
+        // Retorna o template correto com base no formato solicitado
+        if ("tabelas".equalsIgnoreCase(formato)) {
+            return "listarSementesTabelas";
+        } else {
+            return "listarSementes";
+        }
     }
+
     
 }

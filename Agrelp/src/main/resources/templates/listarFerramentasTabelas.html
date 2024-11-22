@@ -4,15 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Materiais</title>
+	<title>Lista de Ferramentas</title>
 	<!-- Link do CSS do Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Link do CSS da Sidebar -->
+	<!-- Links dos CSS personalizados -->
 	<link rel="stylesheet" href="/css/sidebar.css">
 	<link rel="stylesheet" href="/css/button.css">
 	<link rel="stylesheet" href="/css/button2.css">
 	<link rel="stylesheet" href="/css/busca.css">
-	<link rel="stylesheet" href="/css/listarFerramentas.css">
+	<link rel="stylesheet" href="/css/listarFerramentasTabelas.css">
+	<script src="/js/downloadPdf.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
@@ -22,21 +23,21 @@
 	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
 	<div class="container mt-5">
-		<h1>Lista de Materiais</h1>
+		<h1>Lista de Ferramentas</h1>
 
 		<div class="d-flex justify-content-between align-items-center mt-4">
 
 			<!-- Botão Voltar para Cards -->
-			<button class="ml-3" onclick="window.location.href='/materiais'">
-				<span class="text">Listar em Tabelas</span>
+			<button class="ml-3 me-3" onclick="window.location.href='/ferramentas/cards'">
+				<span class="text">Listar em Cards</span>
 			</button>
 
 
 			<!-- Formulário centralizado -->
-			<div class="d-flex justify-content-center flex-grow-1">
-				<form action="/materiais/buscar" method="get" class="d-flex" style="max-width: 500px; width: 100%;">
+			<div class="">
+				<form action="/ferramentas/buscar" method="get" class="d-flex" style="max-width: 500px; width: 100%;">
 					<!-- Campo oculto para definir o formato -->
-					<input type="hidden" name="formato" value="cards"> <!-- Altere para 'tabelas' onde necessário -->
+					<input type="hidden" name="formato" value="tabelas"> <!-- Altere para 'tabelas' onde necessário -->
 
 					<div class="galaxy"></div>
 					<div id="search-container">
@@ -48,7 +49,7 @@
 						<div class="stardust"></div>
 						<div class="cosmic-ring"></div>
 						<div id="main" class="d-flex align-items-center">
-							<input class="input flex-grow-1" name="nome" type="text" placeholder="Buscar Material" />
+							<input class="input flex-grow-1" name="nome" type="text" placeholder="Buscar Ferramenta" />
 							<div id="input-mask"></div>
 							<div id="cosmic-glow"></div>
 							<div class="wormhole-border"></div>
@@ -70,42 +71,64 @@
 					<button2 type="submit"></button2>
 				</form>
 			</div>
+
+			<!-- Botão para gerar o PDF -->
+			<button id="download-pdf" class="mr-3">
+				<span class="text">Baixar Relátorio</span>
+			</button>
+
+
 		</div>
 
 		<hr class="mt-3">
-		<!-- Cards de materiais -->
-		<div class="row">
-			<div class="col-md-4 col-sm-6 mb-4" th:each="material, iterStat : ${materiais}">
-				<div class="card text-white shadow-lg" style="border-radius: 15px; overflow: hidden;">
-					<div class="card-body">
-						<h5 class="card-title" th:text="${material.nome}"></h5>
-						<p class="card-text"><strong style="color: yellow;">Categoria:</strong> <span
-								th:text="${material.categoria}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Descrição:</strong> <span
-								th:text="${material.descricao}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Quantidade:</strong> <span
-								th:text="${material.quantidade}"></span></p>
-					</div>
-					<div class="card-footer text-center">
-						<a th:href="@{/materiais/editar/{id}(id=${material.id})}" class="btn btn-warning btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja editar este material?');">
-							<i class="fas fa-edit"></i> Editar
-						</a>
-						<a th:href="@{/materiais/deletar/{id}(id=${material.id})}" class="btn btn-danger btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja deletar este material?');">
-							<i class="fas fa-trash-alt"></i> Deletar
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<!--<button onclick="window.location.href='/materiais/adicionar'">
-            <span class="text">Adicionar Material</span>
-        </button>-->
+		<!-- Tabela de ferramentas -->
+		<div class="table-responsive">
+			<table class="table table-hover text-white">
+				<thead>
+					<tr>
+						<th scope="col">Nome</th>
+						<th scope="col">Descrição</th>
+						<th scope="col">Marca</th>
+						<th scope="col">Quantidade</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="ferramenta : ${ferramentas}">
+						<td th:text="${ferramenta.nome}"></td>
+						<td th:text="${ferramenta.descricao}"></td>
+						<td th:text="${ferramenta.marca}"></td>
+						<td th:text="${ferramenta.quantidade}"></td>
+						<td>
+							<div class="d-flex justify-content-center">
+								<a th:href="@{/ferramentas/editar/{id}(id=${ferramenta.id})}"
+									class="btn btn-sm btn-outline-warning me-2"
+									onclick="return confirm('Tem certeza que deseja editar esta ferramenta?');">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a th:href="@{/ferramentas/deletar/{id}(id=${ferramenta.id})}"
+									class="btn btn-sm btn-outline-danger"
+									onclick="return confirm('Tem certeza que deseja deletar esta ferramenta?');">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<!-- Scripts -->
+
+	<!-- Link para o jsPDF -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<!-- Link para o html2pdf -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+	<!-- Link para o autoTable do jsPDF -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.26/jspdf.plugin.autotable.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

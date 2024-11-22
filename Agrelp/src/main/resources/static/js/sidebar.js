@@ -1,16 +1,12 @@
+// Selecionando o botão e a sidebar
+const toggleSidebar = document.getElementById('toggle-sidebar');
+const sidebar = document.querySelector('.sidebar');
 
-let btn = document.querySelector(".fa-bars");
-let sidebar = document.querySelector(".sidebar");
-
-btn.addEventListener("click", () => {
-  sidebar.classList.toggle("close");
+// Adicionando evento de clique
+toggleSidebar.addEventListener('change', function () {
+    if (this.checked) {
+        sidebar.classList.add('open');
+    } else {
+        sidebar.classList.remove('open');
+    }
 });
-
-let arrows = document.querySelectorAll(".arrow");
-for (var i = 0; i < arrows.length; i++) {
-  arrows[i].addEventListener("click", (e) => {
-    let arrowParent = e.target.parentElement.parentElement;
-
-    arrowParent.classList.toggle("show");
-  });
-}

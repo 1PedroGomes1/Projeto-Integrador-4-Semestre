@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="/css/button.css">
 	<link rel="stylesheet" href="/css/button2.css">
 	<link rel="stylesheet" href="/css/busca.css">
-	<link rel="stylesheet" href="/css/listarFerramentas.css">
+	<link rel="stylesheet" href="/css/listarFerramentasTabelas.css">
+	<script src="/js/downloadPdfSementes.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
@@ -27,16 +28,15 @@
 		<div class="d-flex justify-content-between align-items-center mt-4">
 
 			<!-- Botão Voltar para Cards -->
-			<button class="ml-3" onclick="window.location.href='/sementes'">
-				<span class="text">Listar em Tabelas</span>
+			<button class="ml-3 me-3" onclick="window.location.href='/sementes/cards'">
+				<span class="text">Listar em Cards</span>
 			</button>
 
-
 			<!-- Formulário centralizado -->
-			<div class="d-flex justify-content-center flex-grow-1">
+			<div class="">
 				<form action="/sementes/buscar" method="get" class="d-flex" style="max-width: 500px; width: 100%;">
 					<!-- Campo oculto para definir o formato -->
-					<input type="hidden" name="formato" value="cards"> <!-- Altere para 'tabelas' onde necessário -->
+					<input type="hidden" name="formato" value="tabelas"> <!-- Altere para 'tabelas' onde necessário -->
 
 					<div class="galaxy"></div>
 					<div id="search-container">
@@ -71,43 +71,60 @@
 				</form>
 			</div>
 
+			<!-- Botão para gerar o PDF -->
+			<button id="download-pdf2" class="mr-3">
+				<span class="text">Baixar Relátorio</span>
+			</button>
 		</div>
 
 		<hr class="mt-3">
-		<!-- Cards de sementes -->
-		<div class="row">
-			<div class="col-md-4 col-sm-6 mb-4" th:each="semente, iterStat : ${sementes}">
-				<div class="card text-white shadow-lg" style="border-radius: 15px; overflow: hidden;">
-					<div class="card-body">
-						<h5 class="card-title" th:text="${semente.nome}"></h5>
-						<p class="card-text"><strong style="color: yellow;">Data de Colheita:</strong> <span
-								th:text="${semente.dataColheita}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Data de Validade:</strong> <span
-								th:text="${semente.dataValidade}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Quantidade:</strong> <span
-								th:text="${semente.quantidade}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Condições de Armazenamento:</strong> <span
-								th:text="${semente.condicoesArmazenamento}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Produtor/Fabricante:</strong> <span
-								th:text="${semente.produtorFabricante}"></span></p>
-					</div>
-					<div class="card-footer text-center">
-						<a th:href="@{/sementes/editar/{id}(id=${semente.id})}" class="btn btn-warning btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja editar esta semente?');">
-							<i class="fas fa-edit"></i> Editar
-						</a>
-						<a th:href="@{/sementes/deletar/{id}(id=${semente.id})}" class="btn btn-danger btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja deletar esta semente?');">
-							<i class="fas fa-trash-alt"></i> Deletar
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
 
+		<!-- Tabela de sementes -->
+		<div class="table-responsive">
+			<table class="table table-hover text-white">
+				<thead>
+					<tr>
+						<th scope="col">Nome</th>
+						<th scope="col">Data de Colheita</th>
+						<th scope="col">Data de Validade</th>
+						<th scope="col">Quantidade</th>
+						<th scope="col">Condições de Armazenamento</th>
+						<th scope="col">Produtor/Fabricante</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="semente : ${sementes}">
+						<td th:text="${semente.nome}"></td>
+						<td th:text="${semente.dataColheita}"></td>
+						<td th:text="${semente.dataValidade}"></td>
+						<td th:text="${semente.quantidade}"></td>
+						<td th:text="${semente.condicoesArmazenamento}"></td>
+						<td th:text="${semente.produtorFabricante}"></td>
+						<td>
+							<div class="d-flex justify-content-center">
+								<a th:href="@{/sementes/editar/{id}(id=${semente.id})}"
+									class="btn btn-sm btn-outline-warning me-2"
+									onclick="return confirm('Tem certeza que deseja editar esta semente?');">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a th:href="@{/sementes/deletar/{id}(id=${semente.id})}"
+									class="btn btn-sm btn-outline-danger"
+									onclick="return confirm('Tem certeza que deseja deletar esta semente?');">
+									<i class="fas fa-trash-alt"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.26/jspdf.plugin.autotable.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -24,12 +24,21 @@ public class MateriaisController {
     }
 
     // Listar todos os materiais
-    @GetMapping
+    @GetMapping("/cards")
     public String listarMateriais(Model model) {
         List<Materiais> materiais = materiaisRepository.findAll();
         model.addAttribute("materiais", materiais);
         return "listarMateriais"; // Retorna a página com a lista de materiais
     }
+    
+    // Listar todos os materiais
+    @GetMapping
+    public String listarMateriaisTabelas(Model model) {
+        List<Materiais> materiais = materiaisRepository.findAll();
+        model.addAttribute("materiais", materiais);
+        return "listarMateriaisTabelas"; // Retorna a página com a lista de materiais
+    }
+    
 
     // Adicionar um novo material
     @PostMapping
