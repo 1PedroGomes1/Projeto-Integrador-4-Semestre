@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const downloadButton = document.getElementById('download-pdf');
+    const downloadButton = document.getElementById('download-pdf-4');
     
     if (downloadButton) {
         downloadButton.addEventListener('click', function() {
@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const toolCount = tableRows.length; // Conta as linhas da tabela (ferramentas)
 
             // Definir título, subtítulo e outras informações
-            const title = "Relatório de Ferramentas Cadastradas";
-            const subtitle = "Informações detalhadas sobre as ferramentas do sistema.";
+            const title = "Relatório de Defensivos Cadastradas";
+            const subtitle = "Informações detalhadas sobre os Defensivos do sistema.";
             const date = new Date().toLocaleDateString(); // Data atual
             const author = "Sistema de Gestão Agrícola"; // Autor ou nome do sistema
 
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", function() {
             doc.text(`Autor: ${author}`, 14, 45); // Autor ou nome do sistema
 
             // Adiciona a contagem de ferramentas no PDF
-            doc.text(`Total de Ferramentas: ${toolCount}`, 14, 50); // Contagem
+            doc.text(`Total de Defensivos: ${toolCount}`, 14, 50); // Contagem
 
             // Extraindo os dados da tabela
             const rows = [];
-            const header = ['Nome', 'Descrição', 'Marca', 'Quantidade']; // Cabeçalho da tabela
+            const header = ['Nome', 'Categoria', 'Descrição', 'Quantidade', 'Fabricante', 'Preço']; // Cabeçalho da tabela
             rows.push(header);
 
             // Preenchendo as linhas da tabela
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             // Baixar o PDF gerado
-            doc.save('relatorio-ferramentas.pdf');
+            doc.save('relatorio-defensivos.pdf');
         });
     }
 });

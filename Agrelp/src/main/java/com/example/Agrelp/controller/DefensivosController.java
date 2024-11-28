@@ -22,11 +22,19 @@ public class DefensivosController {
         return "formDefensivos"; // Formulário para adicionar um novo defensivo
     }
 
-    @GetMapping
+ // Listar todos os materiais
+    @GetMapping("/cards")
     public String listarDefensivos(Model model) {
         List<Defensivos> defensivos = defensivosRepository.findAll();
         model.addAttribute("defensivos", defensivos);
         return "listarDefensivos"; // Exibe a lista de defensivos
+    }
+    
+    @GetMapping
+    public String listarDefensivosTabelas(Model model) {
+        List<Defensivos> defensivos = defensivosRepository.findAll();
+        model.addAttribute("defensivos", defensivos);
+        return "listarDefensivosTabelas"; // Exibe a lista de defensivos
     }
 
     @PostMapping
@@ -68,21 +76,32 @@ public class DefensivosController {
         return "redirect:/defensivos"; // Redireciona para a lista de defensivos
     }
     
- // Método para buscar ferramentas por nome
+ // Método para buscar defensivos por nome
     @GetMapping("/buscar")
-    public String buscarDefensivos(@RequestParam(required = false) String nome, Model model) {
+    public String buscarDefensivos(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false, defaultValue = "cards") String formato,
+            Model model) {
+
         List<Defensivos> defensivos;
-        
+
         if (nome == null || nome.trim().isEmpty()) {
-            // Retorna todas as ferramentas se o campo estiver vazio
+            // Retorna todos os defensivos se o campo estiver vazio
             defensivos = defensivosRepository.findAll();
         } else {
             // Realiza a busca pelo nome
-        	defensivos = defensivosRepository.findByNomeContainingIgnoreCase(nome);
+            defensivos = defensivosRepository.findByNomeContainingIgnoreCase(nome);
         }
-        
+
         model.addAttribute("defensivos", defensivos);
-        return "listarDefensivos"; // Exibe a lista (completa ou filtrada)
+
+        // Retorna o template correto com base no formato solicitado
+        if ("tabelas".equalsIgnoreCase(formato)) {
+            return "listarDefensivosTabelas"; // Template para exibir em tabelas
+        } else {
+            return "listarDefensivos"; // Template para exibir em cards
+        }
     }
+
     
 }

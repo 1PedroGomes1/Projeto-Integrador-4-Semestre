@@ -82,21 +82,32 @@ public class MateriaisController {
         return "redirect:/materiais"; // Redireciona para a página de listagem após deletar
     }
     
- // Método para buscar ferramentas por nome
+ // Método para buscar materiais por nome
     @GetMapping("/buscar")
-    public String buscarMateriais(@RequestParam(required = false) String nome, Model model) {
+    public String buscarMateriais(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false, defaultValue = "cards") String formato,
+            Model model) {
+
         List<Materiais> materiais;
-        
+
         if (nome == null || nome.trim().isEmpty()) {
-            // Retorna todas as ferramentas se o campo estiver vazio
-        	materiais = materiaisRepository.findAll();
+            // Retorna todos os materiais se o campo estiver vazio
+            materiais = materiaisRepository.findAll();
         } else {
             // Realiza a busca pelo nome
-        	materiais = materiaisRepository.findByNomeContainingIgnoreCase(nome);
+            materiais = materiaisRepository.findByNomeContainingIgnoreCase(nome);
         }
-        
+
         model.addAttribute("materiais", materiais);
-        return "listarMateriais"; // Exibe a lista (completa ou filtrada)
+
+        // Retorna o template correto com base no formato solicitado
+        if ("tabelas".equalsIgnoreCase(formato)) {
+            return "listarMateriaisTabelas"; // Template para exibir em tabelas
+        } else {
+            return "listarMateriais"; // Template para exibir em cards
+        }
     }
+
     
 }
