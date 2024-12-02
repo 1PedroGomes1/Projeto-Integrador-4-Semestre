@@ -11,5 +11,12 @@ public class SidebarController {
         // Retorna a página que inclui o fragmento da sidebar
         return "estoque"; // Nome do arquivo HTML (sem extensão)
     }
+	
+	@GetMapping("/bemvindo")
+    public String exibirIndex() {
+        // Retorna a página que inclui o fragmento da sidebar
+        return "index"; // Nome do arquivo HTML (sem extensão)
+    }
+	
 }
 	
