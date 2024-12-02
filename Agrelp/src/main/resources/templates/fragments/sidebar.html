@@ -11,12 +11,6 @@
 
 <body>
 	
-	<!-- Botão hamburger para dispositivos móveis -->
-	<input type="checkbox" id="toggle-sidebar" hidden />
-	<label for="toggle-sidebar" class="hamburger-label hamburger">
-	    <i class='fas fa-bars'></i>
-	</label>
-	
 	<div class="sidebar close" th:fragment="sidebar">
 		<div class="logo-details">
 			<i class='fas fa-seedling'></i>
@@ -79,10 +73,19 @@
 					<li><a class="link_name" href="/estoque">Estoque</a></li>
 				</ul>
 			</li>
+
+			<!-- Como Usar o Sistema -->
+			<li class="mt-4">
+				<a href="/pdf/manual-uso.pdf" target="_blank">
+					<i class='fas fa-file-pdf'></i>
+					<span class="link_name">Como Usar o Sistema</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="/pdf/manual-uso.pdf" target="_blank">Como Usar o Sistema</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
-
-
 </body>
 
 </html>

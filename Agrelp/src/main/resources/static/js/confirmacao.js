@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const successMessage = form.dataset.successMessage || "Operação realizada com sucesso!"; // Mensagem padrão
+    const successMessage = form.dataset.successMessage || "Adicionado com sucesso ao sistema!"; // Mensagem padrão
     const submitDelay = parseInt(form.dataset.submitDelay, 10) || 500; // Tempo padrão de atraso
 
     form.addEventListener("submit", (event) => {

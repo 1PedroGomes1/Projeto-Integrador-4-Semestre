@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="/css/button2.css">
 	<link rel="stylesheet" href="/css/busca.css">
 	<link rel="stylesheet" href="/css/listarFerramentas.css">
+	<link rel="stylesheet" href="/css/confirmacao.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
@@ -74,8 +75,13 @@
 		</div>
 
 		<hr class="mt-3">
+
+		<!-- Mensagem de Confirmação -->
+		<div id="confirmationMessage" class="d-none"></div>
+
 		<!-- Cards de sementes -->
 		<div class="row">
+
 			<div class="col-md-4 col-sm-6 mb-4" th:each="semente, iterStat : ${sementes}">
 				<div class="card text-white shadow-lg" style="border-radius: 15px; overflow: hidden;">
 					<div class="card-body">
@@ -106,6 +112,9 @@
 		</div>
 
 	</div>
+
+	<!-- Link para o arquivo JS externo -->
+	<script src="/js/confirmacaoDelete.js"></script>
 
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

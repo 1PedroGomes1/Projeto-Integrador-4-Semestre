@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="/css/busca.css">
 	<link rel="stylesheet" href="/css/listarFerramentasTabelas.css">
 	<script src="/js/downloadPdfSementes.js"></script>
+	<link rel="stylesheet" href="/css/confirmacao.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
@@ -79,6 +80,9 @@
 
 		<hr class="mt-3">
 
+		<!-- Mensagem de Confirmação -->
+		<div id="confirmationMessage" class="d-none"></div>
+
 		<!-- Tabela de sementes -->
 		<div class="table-responsive">
 			<table class="table table-hover text-white">
@@ -109,8 +113,7 @@
 									<i class="fas fa-edit"></i>
 								</a>
 								<a th:href="@{/sementes/deletar/{id}(id=${semente.id})}"
-									class="btn btn-sm btn-outline-danger"
-									onclick="return confirm('Tem certeza que deseja deletar esta semente?');">
+									class="btn btn-sm btn-outline-danger">
 									<i class="fas fa-trash-alt"></i>
 								</a>
 							</div>
@@ -120,6 +123,9 @@
 			</table>
 		</div>
 	</div>
+
+	<!-- Link para o arquivo JS externo -->
+	<script src="/js/confirmacaoDelete.js"></script>
 
 	<!-- Scripts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
