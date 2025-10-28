@@ -1,0 +1,56 @@
+/* Resetando margens e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo de fundo e posicionamento */
+body {
+    background-image: url('/images/Planta.jpg'); /* Caminho correto da imagem */
+    background-size: cover; /* A imagem irá cobrir toda a tela */
+    background-position: center center; /* A imagem será centralizada */
+    background-attachment: fixed; /* A imagem fica fixa durante o scroll */
+    height: 100vh; /* A altura da tela será 100% da viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo do container de boas-vindas */
+.welcome-container {
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente para melhorar a legibilidade */
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o título */
+.welcome-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o parágrafo */
+.welcome-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Estilo para o botão */
+.welcome-container .btn {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.welcome-container .btn:hover {
+    background-color: #0056b3;
+}

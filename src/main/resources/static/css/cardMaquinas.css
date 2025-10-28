@@ -1,0 +1,119 @@
+.container h1 {
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.card-container::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #4f4fd1 0%, #00d4ff 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(15px);
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+.card .img-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-45deg, #00d4ff 0%, #4f4fd1 100%);
+    transition: scale 0.6s, rotate 0.6s, filter 1s;
+}
+
+.card .img-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.6s;
+}
+
+.card .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    color: #e8e8e8;
+    padding: 20px 24px;
+    line-height: 1.5;
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none; /* Desativa eventos de ponteiro */
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card .content .heading {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.card:hover .content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Ativa eventos de ponteiro ao fazer hover */
+}
+
+.card:hover .img-content {
+    scale: 2.5;
+    rotate: 30deg;
+    filter: blur(7px);
+}
+
+.card:hover .img-content img {
+    filter: brightness(50%);
+}
+
+/* Button styling */
+.card button {
+    position: absolute;
+    bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 7px;
+    border: 1px solid rgb(61, 106, 255);
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: transparent;
+    color: #fff;
+    transition: all 0.2s ease-in;
+    width: 45%;
+    white-space: nowrap;
+}
+
+/* Posiciona o botão à esquerda */
+.card button.left {
+    left: 10px;
+}
+
+/* Hover effect for buttons */
+.card button:hover {
+    background: rgb(61, 106, 255);
+    box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+    transition: all 0.2s ease-out;
+}

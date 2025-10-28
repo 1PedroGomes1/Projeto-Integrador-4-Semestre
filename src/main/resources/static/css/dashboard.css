@@ -1,0 +1,272 @@
+/* ===== Tema claro premium ===== */
+:root{
+  --page-bg-1:#ffffff;
+  --page-bg-2:#ffffff;
+  --text-strong:#0f172a;
+  --text:#111827;
+  --muted:#6b7280;
+
+  /* Tamanho FIXO dos cards (desktop/tablet) */
+  --card-w: 300px;
+  --card-h: 200px; /* ajuste aqui se quiser mais alto/baixo */
+}
+
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at -200px -200px, rgba(17,24,39,0.05), transparent 60%),
+    linear-gradient(180deg, var(--page-bg-1) 0%, var(--page-bg-2) 100%);
+}
+
+/* Títulos */
+.dashboard-title{ color:var(--text-strong); font-weight:800; margin:0; }
+.painel-title{ color:var(--muted); font-weight:500; margin:0; }
+
+/* Tipos */
+.custom-text-size   { font-size:30px; }
+.custom-text-size-2 { font-weight:700; font-size:20px; }
+
+/* ====== Cards tonais: mesma LARGURA e ALTURA ====== */
+.card-tonal{
+  display:flex;
+  flex-direction:column;
+  border:2px solid transparent;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+
+  /* Altura FIXA pra todos */
+  height: var(--card-h);
+  max-width:100%;
+  width:100%;
+}
+
+/* desktop/tablet: largura fixa (geral) */
+@media (min-width:576px){
+  .card-tonal{ width: var(--card-w); }
+}
+
+/* >>> dentro da grade de KPIs, o card deve preencher a célula */
+.kpi-grid .card-tonal{ width:100%; }
+
+/* Header com altura fixa (uniformiza) */
+.card-tonal .card-header{
+  height:48px;
+  padding:0;
+  border:0;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  position: relative; /* necessário p/ a linha divisória */
+}
+
+/* Body ocupa o restante e centraliza */
+.card-tonal .card-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:14px 16px;
+  text-align:center;
+}
+.card-tonal .card-title{
+  font-weight:700;
+  font-size:20px;
+  color:var(--text-strong);
+  margin:0 0 6px 0;
+}
+.card-tonal .kpi{
+  font-size:30px;
+  color:var(--text-strong);
+  margin:0;
+}
+
+/* ===== Cores tonais (borda UM TOM mais escuro que o fundo) ===== */
+/* Amarelo (Máquinas) */
+.tone-warn{ background:#FFE6A1; border-color:#E9C66B; --card-border-color:#E9C66B; }
+.tone-warn .card-header i{ color:#8A6C00; }
+
+/* Azul claro (Ferramentas) */
+.tone-info{ background:#CDE3FF; border-color:#83B1F2; --card-border-color:#83B1F2; }
+.tone-info .card-header i{ color:#0B63A7; }
+
+/* Verde (Sementes) */
+.tone-success{ background:#CBEFCF; border-color:#79C18B; --card-border-color:#79C18B; }
+.tone-success .card-header i{ color:#0E7A2E; }
+
+/* Vermelho (Materiais) */
+.tone-danger{ background:#FFCACA; border-color:#E18C8C; --card-border-color:#E18C8C; }
+.tone-danger .card-header i{ color:#9E1C1C; }
+
+/* Azul/Primary (Defensivos) */
+.tone-primary{ background:#CBD6FF; border-color:#7E96EE; --card-border-color:#7E96EE; }
+.tone-primary .card-header i{ color:#2B4ACB; }
+
+/* NEUTRO (Total de Registros) */
+.tone-neutral{ background:#EEF2F6; border-color:#D2DAE4; --card-border-color:#D2DAE4; }
+.tone-neutral .card-header i{ color:#334155; }
+
+/* ===== Grid responsiva (centraliza os cards dentro das colunas Bootstrap quando usada) ===== */
+.card{ max-width:100%; }
+.row.g-3 > [class^="col-"],
+.row.g-3 > [class*=" col-"],
+.row.g-4 > [class^="col-"],
+.row.g-4 > [class*=" col-"]{
+  display:flex;
+  justify-content:center;
+}
+
+/* === NOVA GRID DE KPIs (3 por linha no desktop) === */
+.kpi-grid{
+  display:grid;
+  gap:22px;
+  grid-template-columns:1fr;            /* mobile: 1 coluna */
+}
+@media (min-width:576px){
+  .kpi-grid{ grid-template-columns: repeat(2, 1fr); } /* tablet: 2 */
+}
+@media (min-width:992px){
+  .kpi-grid{ grid-template-columns: repeat(3, 1fr); } /* desktop: 3 */
+}
+
+/* mesma altura visual em todas as quebras */
+.kpi-card{ height:180px; }
+.kpi .card-body{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+
+/* Mobile tweaks */
+@media (max-width:575.98px){
+  .dashboard-title{ font-size:1.6rem; text-align:center; }
+  .painel-title{ font-size:.95rem; text-align:center; }
+  .card-tonal{ height: calc(var(--card-h) - 10px); } /* um pouco menor no mobile */
+  .card-tonal .card-header{ height:44px; font-size:26px; }
+  .card-tonal .card-title{ font-size:18px; }
+  .card-tonal .kpi{ font-size:26px; }
+}
+
+/* Médias/Grandes */
+@media (min-width:576px) and (max-width:991.98px){
+  .dashboard-title{ font-size:1.8rem; }
+  .painel-title{ font-size:1rem; }
+}
+@media (min-width:992px){
+  .dashboard-title{ font-size:2rem; }
+  .painel-title{ font-size:1.05rem; }
+}
+
+/* === MOBILE: até 575.98px === */
+@media (max-width:575.98px){
+  /* Largura útil do conteúdo: desconta aprox. a sidebar colapsada (92px) + respiro */
+  .container,
+  .container .container-cards{
+    max-width: calc(100vw - 110px);
+    margin-left: auto;
+    margin-right: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Cards menores */
+  .card-tonal{
+    width: 100%;
+    height: 170px;
+    border-radius: 14px;
+  }
+  .card-tonal .card-header{
+    height: 42px;
+    font-size: 24px;
+  }
+  .card-tonal .card-title{ font-size: 18px; }
+  .card-tonal .kpi{ font-size: 26px; }
+
+  /* Títulos do topo */
+  .dashboard-title{
+    font-size: 1.55rem;
+    line-height: 1.2;
+    margin: 6px 12px 0 0;
+    text-align: center;
+  }
+  .painel-title{
+    font-size: .98rem;
+    line-height: 1.25;
+    margin: 2px 12px 0 0;
+    text-align: center;
+  }
+
+  html, body{ overflow-x: hidden; }
+}
+
+/* === LINHA DIVISÓRIA ORIGINAL (2px colada e cor EXATA da borda) === */
+.card-tonal .card-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--card-border-color);
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ===== Painéis dos gráficos (estilo cartão, claro) ===== */
+.analytics-wrap { max-width: 1100px; }
+
+.panel-analytics{
+  background: #ffffff;
+  border: 1px solid rgba(17,24,39,0.10);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+  padding: 14px 14px 10px 14px;
+}
+
+.panel-analytics__title{
+  display:flex; align-items:center; gap:10px;
+  font-weight: 700; color:#0f172a;
+  padding: 6px 6px 10px 6px;
+  border-bottom: 1px solid rgba(17,24,39,0.10);
+  margin-bottom: 6px;
+}
+
+.panel-analytics__title .dot{
+  width:10px; height:10px; border-radius:999px;
+  background:#2563eb;
+}
+
+/* Responsivo dos painéis de gráficos */
+@media (max-width: 575.98px){
+  .analytics-wrap{ 
+    max-width: calc(100vw - 110px);
+    margin-left: auto; margin-right: 12px;
+  }
+  .panel-analytics{ border-radius: 14px; }
+}
+
+/* cartão com um mínimo de altura (estética) */
+.chart-card{ min-height: 280px; }
+
+/* a caixa que define a altura REAL do gráfico */
+.chart-fixed{
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+
+/* garante que nenhum CSS global estrague o canvas */
+.chart-fixed canvas{
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+}
+
+/* mobile: um pouco mais baixo pra caber melhor */
+@media (max-width: 575.98px){
+  .chart-fixed{ height: 220px; }
+}

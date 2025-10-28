@@ -1,0 +1,38 @@
+/* Efeito de brilho no hover */
+.btn-warning, .btn-danger {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    width: 100%; /* Garante que os botões ocupem 100% da largura disponível */
+    text-align: center; /* Alinha o texto no centro do botão */
+}
+
+/* Efeito de brilho */
+.btn-warning:hover, .btn-danger:hover {
+    box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7); /* Brilho suave */
+    transform: scale(1.05); /* Aumenta um pouco o tamanho no hover */
+}
+
+.btn-warning:hover {
+    box-shadow: 0 0 10px 4px rgba(255, 193, 7, 0.7); /* Brilho dourado para o botão de editar */
+}
+
+.btn-danger:hover {
+    box-shadow: 0 0 10px 4px rgba(220, 53, 69, 0.7); /* Brilho vermelho para o botão de deletar */
+}
+
+/* Impede que os botões quebrem a linha */
+td {
+    white-space: normal; /* Deixa as outras células com texto podendo quebrar linha */
+}
+
+td a {
+    display: inline-flex; /* Faz com que os botões fiquem na mesma linha */
+    margin-right: 5px; /* Adiciona um pequeno espaçamento entre os botões */
+    max-width: 50px; /* Garante que os botões dentro das células de tabela tenham o mesmo tamanho */
+	min-width: 50px;
+}
+
+td a:last-child {
+    margin-right: 0; /* Remove a margem do último botão */
+}

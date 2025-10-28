@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilos do app -->
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="text-slate-900">
+  <!-- Sidebar (fragmento) -->
+  <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+  <!-- CONTEÚDO: acompanha a largura da sidebar -->
+  <main class="with-sidebar container py-3">
+    <header class="mb-2">
+      <h1 class="dashboard-title text-center text-lg-start mb-1">
+        Dashboard
+      </h1>
+      <h6 class="painel-title text-center text-lg-start">
+        Um painel analítico para a visualização geral
+      </h6>
+    </header>
+
+	<!-- Cards responsivos (substitua sua seção atual por esta) -->
+	<section class="kpi-grid mt-1">
+	  <!-- Máquinas (AMARELO) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-warn kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fa-solid fa-tractor"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Máquinas</h5>
+	        <p class="card-text kpi"><span th:text="${quantidadeMaquinas}">0</span></p>
+	      </div>
+	    </div>
+	  </div>
+
+	  <!-- Ferramentas (AZUL CLARO) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-info kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fas fa-hammer"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Ferramentas</h5>
+	        <p class="card-text kpi"><span th:text="${quantidadeFerramentas}">0</span></p>
+	      </div>
+	    </div>
+	  </div>
+
+	  <!-- Sementes (VERDE) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-success kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fas fa-seedling"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Sementes</h5>
+	        <p class="card-text kpi"><span th:text="${quantidadeSementes}">0</span></p>
+	      </div>
+	    </div>
+	  </div>
+
+	  <!-- Materiais (VERMELHO) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-danger kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fas fa-cogs"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Materiais</h5>
+	        <p class="card-text kpi"><span th:text="${quantidadeMateriais}">0</span></p>
+	      </div>
+	    </div>
+	  </div>
+
+	  <!-- Defensivos (AZUL / PRIMARY) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-primary kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fas fa-vial"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Defensivos</h5>
+	        <p class="card-text kpi"><span th:text="${quantidadeDefensivos}">0</span></p>
+	      </div>
+	    </div>
+	  </div>
+
+	  <!-- NOVO: Total de Registros (NEUTRO) -->
+	  <div class="kpi">
+	    <div class="card card-tonal tone-neutral kpi-card">
+	      <div class="card-header text-center">
+	        <i class="fa-solid fa-layer-group"></i>
+	      </div>
+	      <div class="card-body text-center">
+	        <h5 class="card-title">Total de Registros</h5>
+	        <p class="card-text kpi">
+	          <span th:text="${quantidadeMaquinas + quantidadeFerramentas + quantidadeSementes + quantidadeMateriais + quantidadeDefensivos}">0</span>
+	        </p>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+
+  </main>
+
+  <!-- ANALYTICS (apenas UMA seção) -->
+  <section class="container analytics-wrap mt-3 mb-5">
+    <div class="row g-3 g-sm-4">
+      <!-- Linha: Evolução Mensal (Lead Time em dias) -->
+      <div class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge rounded-circle" style="width:8px;height:8px;background:#2563eb;"></span>
+              <strong>Evolução Mensal · Lead Time (dias)</strong>
+            </div>
+            <div class="chart-fixed">
+              <canvas id="chartLeadTime"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barras: On-Time por Região (%) -->
+      <div class="col-12 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge rounded-circle" style="width:8px;height:8px;background:#1d4ed8;"></span>
+              <strong>On-Time Delivery por Região (%)</strong>
+            </div>
+            <div class="chart-fixed">
+              <canvas id="chartOnTimeRegion"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart.js (apenas UMA vez) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+
+  <!-- CSS para travar a altura dos gráficos -->
+  <style>
+    .chart-fixed{
+      position: relative;
+      width: 100%;
+      height: 260px;                 /* altura no desktop */
+    }
+    .chart-fixed canvas{
+      display: block;
+      width: 100% !important;
+      height: 100% !important;       /* preenche a caixa de 260px */
+      max-width: 100%;
+    }
+    @media (max-width: 575.98px){
+      .chart-fixed{ height: 220px; } /* altura menor no mobile */
+    }
+  </style>
+
+  <!-- JS dos gráficos (consumindo os endpoints do controller) -->
+  <script>
+  (async () => {
+    const getJSON = async (url, fallback) => {
+      try {
+        const r = await fetch(url, { headers: { "Accept": "application/json" } });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return await r.json();
+      } catch (e) {
+        console.warn("[FALLBACK]", url, e);
+        return fallback;
+      }
+    };
+
+    // 1) Busca dos endpoints (ou fallback)
+    const lead = await getJSON(
+      "/dashboard/api/lead-time",
+      { labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul'], data: [2.2,2.05,1.9,1.78,1.79,1.6,1.45], series: "Lead Time (dias)" }
+    );
+
+    const ontime = await getJSON(
+      "/dashboard/api/on-time-region",
+      { labels: ['US','EU','BR','APAC'], data: [98,96,95,97], series: "On-Time (%)" }
+    );
+
+    // 2) Gráfico de Linha – Lead Time
+    const ctx1 = document.getElementById("chartLeadTime");
+    if (ctx1) {
+      new Chart(ctx1, {
+        type: "line",
+        data: {
+          labels: lead.labels ?? [],
+          datasets: [{
+            label: lead.series ?? "Lead Time (dias)",
+            data: lead.data ?? [],
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 3,
+            fill: false,
+            borderColor: "#2563eb",
+            backgroundColor: "#2563eb"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // usa a altura do CSS
+          plugins: { legend: { display: false }, tooltip: { mode: "index", intersect: false } },
+          scales: {
+            x: { grid: { display: false } },
+            y: {
+              beginAtZero: false,
+              ticks: { callback: v => (Number.isFinite(v) && v.toFixed ? v.toFixed(2) : v) },
+              grid: { color: "rgba(0,0,0,0.06)" }
+            }
+          }
+        }
+      });
+    }
+
+    // 3) Gráfico de Barras – On-Time por Região
+    const ctx2 = document.getElementById("chartOnTimeRegion");
+    if (ctx2) {
+      new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: ontime.labels ?? [],
+          datasets: [{
+            label: ontime.series ?? "On-Time (%)",
+            data: ontime.data ?? [],
+            borderWidth: 1,
+            backgroundColor: "#1d4ed8",
+            borderColor: "#1d4ed8",
+            borderRadius: 8,
+            maxBarThickness: 40
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.parsed.y}%` } } },
+          scales: {
+            x: { grid: { display: false } },
+            y: {
+              beginAtZero: true,
+              suggestedMax: 100,
+              ticks: { callback: v => v + "%" },
+              grid: { color: "rgba(0,0,0,0.06)" }
+            }
+          }
+        }
+      });
+    }
+  })();
+  </script>
+
+
+
+  
+  <!-- Bootstrap JS (opcional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

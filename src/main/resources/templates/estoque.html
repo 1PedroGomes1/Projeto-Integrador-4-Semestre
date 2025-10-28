@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gestão de Itens</title>
+	<!-- Link para o CSS do Bootstrap e CSS personalizado -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+	<link rel="stylesheet" href="/css/cardsEstoque.css"> <!-- Link para o CSS dos cards -->
+	<link rel="stylesheet" href="/css/sidebar.css">
+</head>
+
+<body class="text-white" style="background-color: #212121;">
+
+	<!-- Inclui a sidebar como fragmento -->
+	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+	<!-- Título da página -->
+	<div class="container text-center mt-5">
+		<h1 class="custom-text-size">Gestão do Estoque</h1>
+		<p class="custom-text-size-2">Um painel analítico para a visualização geral do estoque</p>
+	</div>
+
+	<div class="container text-center mt-5">
+		<div class="row justify-content-center">
+			<!-- Card de Sementes -->
+			<div class="col-md-4 mb-4">
+				<div class="card">
+					<div class="card-info">
+						<p class="title">Sementes</p>
+						<a href="/sementes/adicionar"><button class="left">Adicionar</button></a>
+						<a href="/sementes"><button class="right">Lista</button></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card de Pregos e Parafusos -->
+			<div class="col-md-4 mb-4">
+				<div class="card">
+					<div class="card-info">
+						<p class="title">Materiais</p>
+						<a href="/materiais/adicionar"><button class="left">Adicionar</button></a>
+						<a href="/materiais"><button class="right">Lista</button></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card de Defensivos Agrícolas -->
+			<div class="col-md-4 mb-4">
+				<div class="card">
+					<div class="card-info">
+						<p class="title">Defensivos Agrícolas</p>
+						<a href="/defensivos/adicionar"><button class="left">Adicionar</button></a>
+						<a href="/defensivos"><button class="right">Lista</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

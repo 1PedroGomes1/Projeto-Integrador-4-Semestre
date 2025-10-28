@@ -1,0 +1,109 @@
+<!-- fragments/sidebar.html -->
+<aside class="sidebar" id="agrelp-sidebar" th:fragment="sidebar">
+  <div class="sb-header">
+    <button
+      id="agrelp-sidebar-toggle"
+      class="sb-toggle"
+      type="button"
+      aria-label="Alternar sidebar"
+      data-js="sb-toggle"
+      onclick="(function(btn){
+        var s = document.getElementById('agrelp-sidebar'); if(!s) return;
+        s.classList.toggle('is-collapsed');
+        var isCol = s.classList.contains('is-collapsed');
+        document.body.classList.toggle('sb-collapsed', isCol);
+        try{ localStorage.setItem('agrelp.sidebar.collapsed', isCol ? '1' : '0'); }catch(e){}
+      })(this)"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); this.click();}"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="logo">
+      <i class="fas fa-seedling"></i>
+      <span>Agrelp</span>
+    </div>
+  </div>
+
+  <nav class="sb-nav" aria-label="Navegação principal">
+    <a class="sb-item" href="/dashboard">
+      <i class="fas fa-th-large"></i>
+      <span>Dashboard</span>
+      <span class="sb-indicator"></span>
+    </a>
+
+    <div class="sb-section-label">Ferramentas</div>
+    <a class="sb-item" href="/ferramentas">
+      <i class="fas fa-tools"></i>
+      <span>Visão Geral</span>
+      <span class="sb-indicator"></span>
+    </a>
+    <a class="sb-item" href="/ferramentas/adicionar">
+      <i class="fa-solid fa-square-plus"></i>
+      <span>Adicionar</span>
+      <span class="sb-indicator"></span>
+    </a>
+    <a class="sb-item" href="/ferramentas">
+      <i class="fa-solid fa-list"></i>
+      <span>Listar</span>
+      <span class="sb-indicator"></span>
+    </a>
+
+    <div class="sb-section-label">Máquinas</div>
+    <a class="sb-item" href="/maquinas">
+      <i class="fas fa-tractor"></i>
+      <span>Visão Geral</span>
+      <span class="sb-indicator"></span>
+    </a>
+    <a class="sb-item" href="/maquinas/adicionar">
+      <i class="fa-solid fa-circle-plus"></i>
+      <span>Adicionar</span>
+      <span class="sb-indicator"></span>
+    </a>
+    <a class="sb-item" href="/maquinas">
+      <i class="fa-solid fa-table-list"></i>
+      <span>Listar</span>
+      <span class="sb-indicator"></span>
+    </a>
+
+    <div class="sb-section-label">Estoque</div>
+    <a class="sb-item" href="/estoque">
+      <i class="fas fa-box"></i>
+      <span>Estoque</span>
+      <span class="sb-indicator"></span>
+    </a>
+
+    <div class="sb-section-label">Ajuda</div>
+    <a class="sb-item" href="/pdf/manual-uso.pdf" target="_blank" rel="noopener">
+      <i class="fas fa-file-pdf"></i>
+      <span>Como Usar o Sistema</span>
+      <span class="sb-indicator"></span>
+    </a>
+  </nav>
+
+  <div class="sb-footer">
+    <a class="sb-mini" href="/dashboard" title="Início">
+      <i class="fa-solid fa-house"></i>
+    </a>
+    <a class="sb-mini" href="/estoque" title="Estoque">
+      <i class="fa-solid fa-boxes-stacked"></i>
+    </a>
+    <a class="sb-mini" href="/pdf/manual-uso.pdf" target="_blank" title="Manual">
+      <i class="fa-regular fa-circle-question"></i>
+    </a>
+  </div>
+</aside>
+
+<!-- restaura estado salvo ao carregar -->
+<script>
+(function(){
+  var s = document.getElementById('agrelp-sidebar');
+  if(!s) return;
+  try {
+    var saved = localStorage.getItem('agrelp.sidebar.collapsed');
+    var isCol = (saved === '1');
+    s.classList.toggle('is-collapsed', isCol);
+    document.body.classList.toggle('sb-collapsed', isCol);
+  } catch(e){}
+})();
+</script>

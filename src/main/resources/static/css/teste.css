@@ -1,0 +1,29 @@
+/* Button styling */
+.card button {
+  position: absolute;
+  bottom: 15px; /* Ajusta a posição para ficar mais próximo da parte inferior */
+  padding: 12px 20px; /* Aumenta o tamanho dos botões */
+  border-radius: 7px;
+  border: 1px solid rgb(61, 106, 255);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: transparent;
+  color: #fff;
+  transition: all 0.2s ease-in;
+  width: 45%; /* Define a largura dos botões como 45% para que ambos tenham o mesmo tamanho */
+  white-space: nowrap; /* Impede a quebra de linha no texto */
+}
+
+/* Posiciona o botão à esquerda */
+.card button.left {
+  left: 10px; /* Alinha à esquerda */
+}
+
+/* Hover effect for buttons */
+.card button:hover {
+  background: rgb(61, 106, 255);
+  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+  transition: all 0.2s ease-out;
+}

@@ -1,0 +1,98 @@
+/* listarFerramentas.css */
+
+.container h1 {
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* listarFerramentas.css */
+.row {
+    display: flex;
+    justify-content: flex-start; /* Garante o espaçamento uniforme entre os cards */
+    flex-wrap: wrap; /* Permite que os cards se ajustem para a próxima linha se necessário */
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #1a1a1a; /* Fundo do card */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%; /* O card vai ocupar toda a largura disponível */
+    margin: 10px; /* Espaçamento entre os cards */
+    display: flex;
+    flex-direction: column; /* Garante que o conteúdo do card seja empilhado */
+    justify-content: space-between; /* Distribui o conteúdo no card */
+    min-width: 280px; /* Largura mínima */
+    max-width: 320px; /* Largura máxima */
+    height: 400px; /* Altura fixa para garantir que todos os cards sejam do mesmo tamanho */
+}
+
+/* Para quando o card estiver em destaque */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo do conteúdo do card */
+.card-body {
+    background: linear-gradient(135deg, #4f4fd1 0%, #00d4ff 100%);
+    padding: 15px;
+    border-radius: 15px;
+    transition: background 0.3s ease;
+    flex-grow: 1; /* Garante que o corpo do card ocupe o espaço restante */
+    display: flex;
+    flex-direction: column; /* Faz com que os itens do card sejam empilhados */
+    justify-content: space-between; /* Garante que o conteúdo fique bem distribuído */
+}
+
+.card-body:hover {
+    background: linear-gradient(135deg, #00d4ff 0%, #4f4fd1 100%);
+    box-shadow: 0px 0px 10px #ffff; /* Brilho no card */
+}
+
+/* Remover brilho do texto */
+.card-title, .card-text {
+    color: #fff;
+    /* Removido o text-shadow */
+    transition: color 0.3s ease;
+}
+
+
+.card-title:hover, .card-text:hover {
+    color: #ffcc00;
+}
+
+/* Estilo dos botões dentro do card */
+.card-footer .btn {
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card-footer .btn:hover {
+    transform: scale(1.1);
+    background-color: #ffb300;
+}
+
+.card-footer .btn-warning {
+    background-color: #ff8c00;
+    border: none;
+}
+
+.card-footer .btn-danger {
+    background-color: #ff4040;
+    border: none;
+}
+
+/* Centralização dos cards */
+.row.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 20px 0;
+}
