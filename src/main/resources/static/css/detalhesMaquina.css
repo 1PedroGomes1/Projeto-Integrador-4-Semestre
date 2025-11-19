@@ -1,110 +1,167 @@
-/* detalhesMaquina.css */
-body {
-    background-color: #1b1b1b;
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
+/* ===== Fundo geral da tela de detalhes (tema claro) ===== */
+.details-page-body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at -200px -200px, rgba(148,163,184,0.16), transparent 60%),
+    linear-gradient(180deg,#f9fafb 0%,#eef2ff 100%);
+  color:#0f172a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.container h1 {
-    color: #f5f5f5;
-    text-align: center;
-    margin-bottom: 30px;
+/* Títulos */
+.details-title{
+  color:#0f172a;
+  font-weight:800;
+  font-size:2rem;
+}
+.details-subtitle{
+  color:#6b7280;
+  font-size:.95rem;
+  margin:0;
 }
 
-.card {
-    background-color: #2c2c2c;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid #444;
+/* Card principal dos detalhes */
+.machine-card{
+  background:#ffffff;
+  border-radius:18px;
+  border:1px solid rgba(15,23,42,0.06);
+  padding:20px 18px 18px 18px;
+  box-shadow:0 18px 40px rgba(15,23,42,0.08);
 }
 
-.card-body {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-	box-shadow: #ffff;
+/* Nome da máquina */
+.machine-name{
+  font-size:1.4rem;
+  font-weight:700;
+  color:#0f172a;
 }
 
-.card-title {
-    color: #06F3AF;
-    font-size: 2.30rem;
-    text-align: center;
+/* Wrapper da imagem */
+.machine-image-wrapper{
+  width:100%;
+  max-width:360px;
+  border-radius:16px;
+  padding:6px;
+  background:
+    radial-gradient(circle at 0 0, rgba(59,130,246,0.18), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(96,165,250,0.22), transparent 55%);
+  box-shadow:0 16px 32px rgba(15,23,42,0.25);
 }
 
-.card-img-top {
-    width: 100%;
-    height: 280px; /* Ajuste para um quadrado com altura fixa */
-    object-fit: contain; /* Garante que a imagem inteira seja exibida */
-    border-bottom: 2px solid #444;
-    margin-bottom: 15px;
-    background-color: #1b1b1b; /* Cor de fundo para imagens com bordas vazias */
+/* Imagem em si */
+.card-img-top{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  border-radius:12px;
+  background-color:#e5e7eb;
 }
 
-
-.info-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
+/* Botões de editar / deletar na área da imagem */
+.details-action-btn{
+  max-width:52px;
+  min-width:52px;
+  padding:0.4rem 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.info-item {
-    flex: 1 1 calc(50% - 20px); /* Ajusta a largura para caber dois por linha */
-    background-color: #333;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #555;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    color: #ddd;
+/* Grid das informações da máquina */
+.info-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
 }
 
-.info-item p,
-.card-body > p {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #ddd; /* Altera a cor da descrição para ser igual às outras informações */
+/* Cada “caixinha” de info */
+.info-item{
+  flex:1 1 calc(50% - 14px);
+  background:#f9fafb;
+  border-radius:12px;
+  border:1px solid rgba(148,163,184,0.6);
+  padding:10px 12px;
+  box-shadow:0 6px 14px rgba(15,23,42,0.05);
 }
 
-.info-item strong,
-.card-body > p strong {
-    color: #ffca28;
-    font-weight: 600;
+.info-item p{
+  margin:0;
+  font-size:.95rem;
+  color:#111827;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
 }
 
-.divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, #555, transparent);
-    margin: 20px 0;
+.info-item strong{
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:#6b7280;
 }
 
-.btn-primary {
-    background-color: #00acc1;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    color: #fff;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    display: block;
-    width: max-content;
-    margin: 20px auto 0;
+/* Descrição embaixo */
+.machine-description{
+  margin:0;
+  font-size:.98rem;
+  color:#111827;
+}
+.machine-description strong{
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-size:.8rem;
+  color:#6b7280;
+  margin-right:4px;
 }
 
-.btn-primary:hover {
-    background-color: #00838f;
-    transform: scale(1.05);
+/* Linha divisória suave */
+.details-divider{
+  height:1px;
+  background:linear-gradient(to right,transparent,rgba(148,163,184,0.9),transparent);
 }
 
-@media (max-width: 768px) {
-    .info-item {
-        flex: 1 1 100%; /* Largura total em telas menores */
-    }
+/* ===== Responsivo desktop/tablet ===== */
+@media (max-width:991.98px){
+  .machine-card{
+    padding:18px 14px 16px 14px;
+  }
+  .machine-image-wrapper{
+    max-width:100%;
+  }
+}
 
-    .btn-primary {
-        width: 100%;
-    }
+/* ===== Responsivo celular ===== */
+@media (max-width:575.98px){
+
+  /* Ajusta o container pra não “passar” da tela com a sidebar fixa */
+  .details-page-body .container{
+    margin-left: 80px;                 /* largura aproximada da sidebar colapsada */
+    margin-right: 8px;
+    width: calc(100% - 88px);          /* 100% - (margin-left + margin-right) */
+    max-width: none;                   /* remove max-width do .container */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .details-title{
+    font-size:1.7rem;
+    text-align:center;
+  }
+
+  .details-subtitle{
+    text-align:center;
+  }
+
+  .machine-card{
+    margin-top: 0.75rem;
+  }
+
+  .info-item{
+    flex:1 1 100%;
+  }
+
+  .machine-image-wrapper{
+    margin-left:auto;
+    margin-right:auto;
+  }
 }

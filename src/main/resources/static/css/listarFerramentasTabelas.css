@@ -1,76 +1,227 @@
-/* Estilo para o contêiner da tabela */
-.container h1 {
-    color: #f0f0f0;
-    text-align: center;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* ===== Tema claro premium (mesmo do dashboard) ===== */
+:root{
+  --page-bg-1:#ffffff;
+  --page-bg-2:#ffffff;
+  --text-strong:#0f172a;
+  --text:#111827;
+  --muted:#6b7280;
+
+  --surface:#ffffff;
+  --surface-2:#fafafa;
+  --border: rgba(17,24,39,0.10);
+  --border-2: rgba(17,24,39,0.14);
+  --hover: rgba(17,24,39,0.04);
+
+  --warn-bg:#FFE6A1; --warn-bd:#E9C66B; --warn-fg:#8A6C00;
+  --info-bg:#CDE3FF; --info-bd:#83B1F2; --info-fg:#0B63A7;
+  --succ-bg:#CBEFCF; --succ-bd:#79C18B; --succ-fg:#0E7A2E;
+  --dang-bg:#FFCACA; --dang-bd:#E18C8C; --dang-fg:#9E1C1C;
 }
 
-.table-responsive {
-    margin-top: 1.5rem;
-    border-radius: 10px;
-    overflow: hidden;
+/* fundo */
+html,body{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at -200px -200px, rgba(17,24,39,0.05), transparent 60%),
+    linear-gradient(180deg, var(--page-bg-1) 0%, var(--page-bg-2) 100%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Estilo geral da tabela */
-.table {
-    background-color: #2c2c2c;
-    border-collapse: collapse; /* Certifica que não há espaços entre as bordas */
-    color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
+/* ===== Cabeçalho ===== */
+.container.mt-5 h1{
+  color: var(--text-strong);
+  text-align:left;
+  margin:10px 0 6px;
+  font-weight:800;
 }
 
-/* Cabeçalho da tabela */
-.table thead {
-    background-color: #444;
-    color: #ffffff;
-    text-align: center;
-    font-weight: bold;
+.container.mt-5 > .page-subtitle{
+  color:var(--muted);
+  margin-bottom:16px;
 }
 
-/* Células da tabela */
-.table td, .table th {
-    vertical-align: middle;
-    text-align: center;
-    border: none; /* Remove bordas */
+/* ===== Barra de ações ===== */
+.d-flex.justify-content-between.align-items-center.mt-4{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:10px 12px;
+  gap:12px;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
 }
 
-/* Estilo para as linhas ao passar o mouse */
-.table-hover tbody tr:hover {
-    background-color: #3a3a3a;
-    transition: background-color 0.3s ease;
+.d-flex.justify-content-between.align-items-center.mt-4 button,
+#download-pdf{
+  box-shadow:none;
 }
 
-.table-hover tbody tr:hover td, 
-.table-hover tbody tr:hover th {
-    color: #00ff88; /* Texto verde claro */
-    transition: color 0.3s ease;
+/* ===== Tabela ===== */
+.table-responsive{
+  margin-top:18px;
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
 }
 
-/* Botões de ações */
-.btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.6rem;
+.table{
+  margin:0;
+  color:var(--text);
+  background:var(--surface);
 }
 
-.btn-outline-warning {
-    color: #ffc107;
-    border-color: #ffc107;
+.table thead{
+  position:sticky;
+  top:0;
+  z-index:1;
+  background:var(--surface-2);
+  color:var(--text-strong);
+  border-bottom:1px solid var(--border-2);
 }
 
-.btn-outline-warning:hover {
-    background-color: #ffc107;
-    color: #212121;
+.table thead th{
+  font-weight:700;
+  padding:12px 14px;
 }
 
-.btn-outline-danger {
-    color: #dc3545;
-    border-color: #dc3545;
+.table td, .table th{
+  padding:12px 14px;
+  border-bottom:1px solid var(--border);
 }
 
-.btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: #ffffff;
+/* zebra */
+.table tbody tr:nth-child(even){
+  background:var(--surface-2);
+}
+
+/* hover */
+.table-hover tbody tr:hover{
+  background:var(--hover);
+}
+
+/* ===== Botões ===== */
+.btn{
+  font-size:.92rem;
+  padding:.45rem .65rem;
+  border-radius:10px;
+}
+
+/* ===== DESKTOP SIDEBAR ===== */
+.container.mt-5{
+  margin-left:280px;
+  transition:.25s ease;
+  padding:20px 25px;
+}
+
+body.sidebar-collapsed .container.mt-5{
+  margin-left:92px;
+}
+
+/* ============================================================
+   🔥 MOBILE — AJUSTES QUE RESOLVEM O SEU PROBLEMA
+   ============================================================ */
+@media (max-width: 767.98px){
+
+  /* Conteúdo ajustado para caber ao lado da sidebar */
+  .container.mt-5{
+    margin-left:85px !important;
+    padding:12px !important;
+    max-width:calc(100vw - 90px) !important;
+  }
+
+  /* título */
+  .container.mt-5 h1{
+    font-size:1.45rem;
+    text-align:left;
+  }
+
+  .page-subtitle{
+    font-size:.85rem;
+    text-align:left;
+  }
+
+  /* ===== Toolbar ===== */
+  .tools-toolbar,
+  .d-flex.justify-content-between.align-items-center.mt-4{
+    flex-direction:column !important;
+    align-items:center !important;
+    width:100%;
+    gap:12px !important;
+  }
+
+  /* Botões FLUIDOS (acabou o corte!) */
+  .toolbar-btn,
+  #download-pdf{
+    width:100% !important;
+    height:52px !important;
+    font-size:1rem !important;
+    border-radius:14px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+  }
+
+  /* ===== Busca ===== */
+  .tools-search-shell{
+    width:100% !important;
+  }
+
+  .tools-search-shell form{
+    width:100% !important;
+  }
+
+  #search-container{
+    width:100% !important;
+    transform:scale(1);
+  }
+
+  #search-container #main{
+    width:100% !important;
+    height:52px !important;
+  }
+
+  #search-container input{
+    width:100% !important;
+    height:52px !important;
+    padding-left:48px !important;
+    font-size:1rem !important;
+  }
+
+  #search-icon{
+    left:16px !important;
+    right:auto !important;
+    transform:translateY(-50%) !important;
+  }
+
+  /* ===== Tabela ===== */
+  .table-responsive{
+    max-width:100%;
+    overflow-x:auto;
+    margin-top:12px;
+  }
+
+  .table td, .table th{
+    padding:10px 8px !important;
+    font-size:.85rem !important;
+  }
+}
+
+/* ===== Forçar texto escuro ===== */
+.table, .table td, .table th{
+  color:#0f172a !important;
+}
+
+.table-hover tbody tr:hover{
+  background:#eef3ff !important;
+}
+
+.table td, .table th{
+  background:#fff !important;
+}
+
+.table{
+  border:1px solid rgba(17,24,39,.1);
 }
