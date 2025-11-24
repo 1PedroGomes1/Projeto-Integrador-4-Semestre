@@ -1,126 +1,195 @@
-/* cards.css */
 
-/* Card container styling */
-.card {
-  --background: linear-gradient(to right, #13b37f 0%, #11a3c8 100%);
-  width: 300px; /* Aumenta a largura */
-  height: 400px; /* Aumenta a altura */
-  padding: 0.9px;
-  border-radius: 0.7rem;
-  overflow: hidden;
-  background: var(--background);
+
+/* Fundo do html igual ao fim do gradiente do body */
+html {
+  background-color: #eef2ff; /* mesma cor do fim do gradiente */
+}
+
+/* ===== Fundo Claro Premium ===== */
+.estoque-body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at -200px -200px, rgba(59,130,246,0.10), transparent 60%),
+    linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI";
+  color: #1f2937;
+}
+
+/* Ajuste com sidebar */
+.estoque-container {
+  margin-left: 280px;
+  transition: .25s;
+  /* garante que o conteúdo empurre até embaixo */
+  min-height: calc(100vh - 40px);
+  padding-bottom: 40px;
+}
+
+body.sidebar-collapsed .estoque-container {
+  margin-left: 92px;
+}
+
+/* ========= TÍTULOS ========= */
+
+.estoque-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: .1em;
+}
+
+.estoque-subtitle {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* ========= CARD (tema claro com glow multicolor) ========= */
+
+.estoque-card {
+  width: 300px;
+  height: 400px;           /* altura base (mobile/tablet) */
+  padding: 1px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
   position: relative;
-  z-index: 1;
-  margin: 20px auto; /* Center card horizontally within its column */
+  transition: transform .35s ease, box-shadow .35s ease;
 }
 
-/* Glow effect behind the card */
-.card::after {
-  position: absolute;
+/* Glow atrás */
+.estoque-card::before {
   content: "";
-  top: -22px;
-  left: 0px;
-  right: 0;
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(18px);
+  opacity: 0;
+  transform: scale(.92);
+  transition: .3s ease;
   z-index: -1;
-  height: 100%;
-  width: 100%;
-  transform: scale(0.76);
-  filter: blur(34.5px);
-  background: var(--background);
-  transition: opacity 0.5s;
 }
 
-/* Card content styling */
-.card-info {
-  background: #1f1a1d;
-  color: #fff9f9;
+/* Interior branco */
+.estoque-card-inner {
+  height: 100%;
+  background: #ffffff;
+  border-radius: inherit;
+  padding: 26px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.7rem;
+  justify-content: space-between;
+  text-align: center;
 }
 
-/* Title styling */
-.card .title {
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  margin-bottom: 10px;
-  color: #fff9f9;
+/* Título */
+.card-title {
   text-transform: uppercase;
-  font-size: 30px;
-}
-
-/* Button styling */
-.card button {
-  position: absolute;
-  bottom: 15px; /* Ajusta a posição para ficar mais próximo da parte inferior */
-  padding: 12px 20px; /* Aumenta o tamanho dos botões */
-  border-radius: 7px;
-  border: 1px solid rgb(61, 106, 255);
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: .25em;
+  color: #0f172a;
   font-weight: 600;
-  letter-spacing: 1px;
-  background: transparent;
-  color: #fff;
-  transition: all 0.2s ease-in;
-  width: 45%; /* Define a largura dos botões como 45% para que ambos tenham o mesmo tamanho */
-  white-space: nowrap; /* Impede a quebra de linha no texto */
 }
 
-/* Posiciona o botão à esquerda */
-.card button.left {
-  left: 10px; /* Alinha à esquerda */
+/* Texto */
+.card-text {
+  font-size: .95rem;
+  color: #475569;
 }
 
-/* Posiciona o botão à direita */
-.card button.right {
-  right: 10px; /* Alinha à direita */
+/* ===== BOTÕES ===== */
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-/* Hover effect for buttons */
-.card button:hover {
-  background: rgb(61, 106, 255);
-  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-  transition: all 0.2s ease-out;
+.card-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: .82rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.2s ease;
 }
 
-/* Hover effects for card */
-.card:hover::after {
-  opacity: 0.6;
-  top: 18px;
-  transition: 0.6s;
+.card-btn.primary {
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  color: #ffffff;
 }
 
-/* custom-text-size é um estilo para o título "Gestão do Estoque" */
-.custom-text-size {
-    font-size: 36px; /* Tamanho do texto do título */
-    font-weight: bolder; /* Deixa o título mais forte */
-    color: #fff; /* Cor branca */
-    text-transform: uppercase; /* Texto maiúsculo */
-    letter-spacing: 4px; /* Aumenta o espaçamento entre as letras */
+.card-btn.primary:hover {
+  opacity: .9;
+  transform: translateY(-2px);
 }
 
-/* custom-text-size-2 é para o subtítulo */
-.custom-text-size-2 {
-    font-size: 20px;
-    color: #ddd; /* Cor cinza claro */
-    font-weight: normal; /* Peso normal */
-    margin-top: 10px;
+.card-btn.outline {
+  border: 2px solid #60a5fa;
+  color: #1f2937;
+  background: #ffffff;
 }
 
-/* Hover effect for card */
-.card:hover {
-  transform: scale(1.05); /* Slightly enlarges the card */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 25px rgba(0, 142, 236, 0.5); /* Adds a glow shadow */
+.card-btn.outline:hover {
+  background: #e0f2fe;
+  transform: translateY(-2px);
 }
 
-.card:hover::after {
-  opacity: 0.8; /* Increase the glow opacity */
-  top: 15px;
-  transition: opacity 0.6s ease, top 0.6s ease;
+/* ===== CARD HOVER (brilho) ===== */
+.estoque-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 28px rgba(56, 189, 248, 0.25);
+}
+
+.estoque-card:hover::before {
+  opacity: 0.55;
+  transform: scale(1);
+}
+
+/* ===== RESPONSIVO ===== */
+
+/* Tablets / telas médias */
+@media (max-width: 991px) {
+  .estoque-container {
+    margin-left: 92px;
+  }
+}
+
+/* Mobile – layout igual, só encaixando ao lado da sidebar */
+@media (max-width: 767px) {
+
+  .estoque-container {
+    margin-left: 90px !important;  /* espaço da sidebar */
+    margin-right: 0 !important;
+    padding: 12px 12px 16px 16px;
+    max-width: calc(100% - 90px);
+  }
+
+  .estoque-title {
+    font-size: 1.8rem;
+  }
+
+  .estoque-card {
+    width: 100%;
+    max-width: 320px;
+    height: 360px;
+    margin-inline: auto;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .card-btn {
+    width: 100%;
+  }
+}
+
+/* ===== AJUSTES APENAS PARA DESKTOP (altura maior dos cards) ===== */
+@media (min-width: 992px) {
+  .estoque-card {
+    height: 440px; /* aumenta só no desktop */
+	margin-top: 30px;
+  }
 }

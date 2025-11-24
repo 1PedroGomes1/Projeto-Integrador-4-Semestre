@@ -1,35 +1,64 @@
-/* ===== Fundo da página de edição (mesmo clima do dashboard/listas) ===== */
-.edit-page-body{
+/* ===== Fundo geral do formulário (tema claro premium) ===== */
+.form-page-body{
   margin:0;
   background:
     radial-gradient(1200px 600px at -200px -200px, rgba(148,163,184,0.16), transparent 60%),
     linear-gradient(180deg,#f9fafb 0%,#eef2ff 100%);
   color:#0f172a;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* Cartão central que envolve o formulário */
-.edit-card{
+/* Conteúdo alinhado com a sidebar (desktop / tablet) */
+.with-sidebar {
+  margin-left: var(--sidebar-width, 260px);      /* sidebar aberta */
+  padding-right: 1.25rem;
+  transition: margin-left 0.3s ease;
+}
+
+/* Quando a sidebar estiver colapsada (classe adicionada pelo JS) */
+body.sidebar-collapsed .with-sidebar {
+  margin-left: var(--sidebar-collapsed-width, 80px);
+}
+
+/* Em telas menores, o conteúdo ocupa toda a largura
+   (sidebar vira overlay em cima e não empurra o layout) */
+@media (max-width: 992px) {
+  .with-sidebar {
+    margin-left: 0;
+    padding-inline: 1rem;
+  }
+}
+
+/* ===== Card do formulário ===== */
+.form-shell{
+  max-width:1000px;
+  margin:0 auto;
   background:#ffffff;
   border-radius:18px;
   border:1px solid rgba(15,23,42,0.06);
-  padding:22px 18px 18px 18px;
-  box-shadow:0 18px 40px rgba(15,23,42,0.08);
+  box-shadow:0 20px 45px rgba(15,23,42,0.10);
+  padding:24px 20px 20px 20px;
+}
+
+@media (min-width:768px){
+  .form-shell{
+    padding:26px 28px 24px 28px;
+  }
 }
 
 /* Títulos */
-.edit-title{
+.form-title{
   color:#0f172a;
   font-weight:800;
-  font-size:2rem;
-}
-.edit-subtitle{
-  color:#6b7280;
-  font-size:.95rem;
-  margin:0;
+  font-size:1.9rem;
 }
 
-/* ===== Inputs com borda em gradiente claro ===== */
+.form-subtitle{
+  color:#6b7280;
+  font-size:.95rem;
+}
+
+/* ===== Inputs com borda em gradiente suave ===== */
 .input-group{
   position:relative;
   width:100%;
@@ -37,35 +66,36 @@
 
 .input{
   width:100%;
-  border-radius:12px;
-  border:2px solid transparent;                /* a cor vem do gradient */
-  padding:0.95rem 1rem;
-  font-size:1rem;
-  color:#0f172a;
+  border:2px solid transparent;
+  padding:0.85rem 1rem;
+  font-size:.95rem;
+  color:#111827;
   box-sizing:border-box;
+  border-radius:11px;
+
   background:
     linear-gradient(#f9fafb,#f9fafb) padding-box,
-    linear-gradient(145deg,rgba(59,130,246,0.45),rgba(96,165,250,0.55)) border-box;
-  box-shadow:0 10px 24px rgba(15,23,42,0.08);
+    linear-gradient(145deg, rgba(79,70,229,0.35), rgba(56,189,248,0.35)) border-box;
+  box-shadow:0 8px 20px rgba(15,23,42,0.06);
+
   transition:
     background 150ms cubic-bezier(0.4,0,0.2,1),
     box-shadow 150ms cubic-bezier(0.4,0,0.2,1),
-    transform 120ms ease-out;
+    transform 150ms cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Textarea usa o mesmo estilo, só garante altura maior */
-.textarea-input{
+.input.textarea{
   min-height:110px;
   resize:vertical;
 }
 
-/* Foco: gradient mais forte */
+/* Foco */
 .input:focus{
   outline:none;
   background:
     linear-gradient(#ffffff,#ffffff) padding-box,
-    linear-gradient(145deg,#3b82f6,#6366f1) border-box;
-  box-shadow:0 14px 32px rgba(37,99,235,0.30);
+    linear-gradient(145deg,#4f46e5,#0ea5e9) border-box;
+  box-shadow:0 10px 26px rgba(37,99,235,0.28);
   transform:translateY(-1px);
 }
 
@@ -73,35 +103,88 @@
 .user-label{
   position:absolute;
   left:18px;
-  top:0;
-  transform:translateY(1.05rem);
-  font-size:.88rem;
   color:#6b7280;
   pointer-events:none;
+  transform:translateY(0.95rem);
   transition:150ms cubic-bezier(0.4,0,0.2,1);
   background-color:#f9fafb;
-  padding:0 .25em;
+  padding:0 .35em;
+  font-size:.9rem;
   border-radius:4px;
 }
 
-/* Quando o input está em foco ou preenchido */
+/* Quando focar ou quando o campo NÃO estiver vazio
+   (placeholder=" " + :not(:placeholder-shown)) */
 .input:focus ~ .user-label,
-.input:not(:placeholder-shown) ~ .user-label,
-.input:valid ~ .user-label{
-  transform:translateY(-55%) scale(0.82);
+.input:not(:placeholder-shown) ~ .user-label{
+  transform:translateY(-55%) scale(.80);
   color:#2563eb;
 }
 
-/* ===== Pequenos ajustes responsivos ===== */
+/* ===== Upload de imagem (para o form de Máquinas) ===== */
+.custom-file-upload{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  border-radius:14px;
+  padding:10px 14px;
+  background:linear-gradient(135deg,#eef2ff,#e0f2fe);
+  border:1px dashed rgba(79,70,229,0.55);
+  cursor:pointer;
+  box-shadow:0 14px 32px rgba(15,23,42,0.08);
+}
+
+.custom-file-upload .icon{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#1d4ed8;
+  box-shadow:0 10px 24px rgba(37,99,235,0.55);
+}
+
+.custom-file-upload .icon i{
+  color:#ffffff;
+  font-size:1.1rem;
+}
+
+.custom-file-upload .text span{
+  color:#111827;
+  font-size:.9rem;
+  font-weight:500;
+}
+
+.custom-file-upload input{
+  display:none;
+}
+
+/* ===== Ajustes responsivos específicos para CELULAR ===== */
 @media (max-width:575.98px){
-  .edit-title{
-    font-size:1.6rem;
+
+  /* considera a largura da sidebar fixa */
+  .form-page-body .with-sidebar{
+    margin-left: 80px;
+    margin-right: 8px;
+    width: calc(100% - 88px);
+    max-width: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .form-title{
+    font-size:1.7rem;
     text-align:center;
   }
-  .edit-subtitle{
+
+  .form-subtitle{
     text-align:center;
   }
-  .edit-card{
-    padding:18px 14px 14px 14px;
+
+  .form-shell{
+    margin-top: .5rem;
   }
 }
+

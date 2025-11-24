@@ -10,7 +10,7 @@
 
 /* Conteúdo alinhado com a sidebar (desktop / tablet) */
 .with-sidebar {
-  margin-left: var(--sidebar-width, 260px);      /* sidebar aberta */
+  margin-left: var(--sidebar-width, 320px);      /* sidebar aberta */
   padding-right: 1.25rem;
   transition: margin-left 0.3s ease;
 }
