@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,82 +16,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
-<!-- TEMA CLARO (o fundo vem do input.css) -->
-<body class="edit-page-body">
+<!-- Usa o tema claro definido no input.css -->
+<body class="form-page-body">
 
     <!-- Sidebar -->
     <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-    <!-- CONTEÚDO ACOMPANHANDO A SIDEBAR -->
+    <!-- Conteúdo alinhado com a sidebar -->
     <main class="with-sidebar container py-4">
-        <header class="mb-4 text-center text-lg-start">
-            <h1 class="edit-title mb-1">Editar Ferramenta</h1>
-            <p class="edit-subtitle">Atualize as informações da ferramenta cadastrada</p>
-        </header>
 
-        <section class="edit-card shadow-sm">
+        <div class="form-shell">
+            <!-- Cabeçalho -->
+            <div class="text-center mb-4">
+                <h1 class="form-title">Editar Ferramenta</h1>
+                <p class="form-subtitle">
+                    Atualize as informações da ferramenta cadastrada no sistema.
+                </p>
+            </div>
+
             <form th:action="@{/ferramentas/editar/{id}(id=${ferramenta.id})}" method="post">
+                <input type="hidden" th:value="${ferramenta.id}" name="id"/>
 
-                <!-- Nome -->
-                <div class="row mb-3">
+                <div class="row g-3">
+                    <!-- Nome -->
                     <div class="col-12">
                         <div class="input-group">
-                            <input type="text" class="input" id="nome" name="nome"
-                                   th:value="${ferramenta.nome}" autocomplete="off" required>
-                            <label class="user-label" for="nome">Nome da Ferramenta (Ex: Martelo)</label>
+                            <input type="text"
+                                   class="input"
+                                   id="nome"
+                                   name="nome"
+                                   placeholder=" "
+                                   th:value="${ferramenta.nome}"
+                                   autocomplete="off"
+                                   required>
+                            <label class="user-label" for="nome">
+                                Nome da Ferramenta:
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Marca -->
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="input"
+                                   id="marca"
+                                   name="marca"
+                                   placeholder=" "
+                                   th:value="${ferramenta.marca}"
+                                   autocomplete="off"
+                                   required>
+                            <label class="user-label" for="marca">
+                                Marca:
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Quantidade -->
+                    <div class="col-12 col-md-6">
+                        <div class="input-group">
+                            <input type="number"
+                                   class="input"
+                                   id="quantidade"
+                                   name="quantidade"
+                                   placeholder=" "
+                                   th:value="${ferramenta.quantidade}"
+                                   autocomplete="off"
+                                   required>
+                            <label class="user-label" for="quantidade">
+                                Quantidade:
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div class="col-12 col-md-6">
+                        <div class="input-group">
+                            <textarea
+                                class="input textarea"
+                                id="descricao"
+                                name="descricao"
+                                placeholder=" "
+                                autocomplete="off"
+                                required
+                                th:text="${ferramenta.descricao}"></textarea>
+                            <label class="user-label" for="descricao">
+                                Descrição:
+                            </label>
                         </div>
                     </div>
                 </div>
 
-                <!-- Marca -->
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="input-group">
-                            <input type="text" class="input" id="marca" name="marca"
-                                   th:value="${ferramenta.marca}" autocomplete="off" required>
-                            <label class="user-label" for="marca">Marca (Ex: Bellota)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Descrição -->
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="input-group">
-                            <textarea class="input textarea-input" id="descricao" name="descricao"
-                                      autocomplete="off" required
-                                      th:text="${ferramenta.descricao}"></textarea>
-                            <label class="user-label" for="descricao">Descrição (Ex: Usado para pregos)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quantidade -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="input-group">
-                            <input type="number" class="input" id="quantidade" name="quantidade"
-                                   th:value="${ferramenta.quantidade}" autocomplete="off" required>
-                            <label class="user-label" for="quantidade">Quantidade (Ex: 4)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BOTÕES -->
-                <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-2">
+                <!-- Botões (responsivos) -->
+                <div class="mt-4 d-flex flex-column flex-md-row gap-3">
                     <button type="submit"
-                            onclick="return confirm('Tem certeza que deseja salvar as alterações?');">
+                            onclick="return confirm('Tem certeza que deseja salvar as alterações?');"
+                            class="w-100">
                         <span class="text">Salvar Alterações</span>
                     </button>
 
-                    <button type="button" onclick="window.location.href='/ferramentas'">
-                        <span>Lista de Ferramentas</span>
+                    <button type="button"
+                            onclick="window.location.href='/ferramentas'"
+                            class="w-100">
+                        <span class="text">Lista de Ferramentas</span>
                     </button>
                 </div>
             </form>
 
             <div id="message" class="mt-2"></div>
-        </section>
+        </div>
+
     </main>
 
     <!-- Bootstrap bundle -->

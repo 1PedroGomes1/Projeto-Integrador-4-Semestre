@@ -135,17 +135,21 @@
                     </div>
                 </div>
 
-                <!-- Botões -->
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="submit"
-                            onclick="return confirm('Tem certeza que deseja adicionar esta Semente?');">
-                        <span class="text">Adicionar Semente</span>
-                    </button>
+				<!-- Botões -->
+				<div class="mt-4 d-flex flex-column flex-md-row gap-3">
+				    <button type="submit"
+				            class="w-100"
+				            onclick="return confirm('Tem certeza que deseja adicionar esta Semente?');">
+				        <span class="text">Adicionar Semente</span>
+				    </button>
 
-                    <button type="button" onclick="window.location.href='/sementes'">
-                        <span class="text">Lista de Sementes</span>
-                    </button>
-                </div>
+				    <button type="button"
+				            class="w-100"
+				            onclick="window.location.href='/sementes'">
+				        <span class="text">Lista de Sementes</span>
+				    </button>
+				</div>
+
             </form>
         </div>
     </div>

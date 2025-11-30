@@ -2,124 +2,172 @@
 <html lang="pt-BR">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Sementes</title>
-	<!-- Link do CSS do Bootstrap -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Links de CSS personalizados -->
-	<link rel="stylesheet" href="/css/sidebar.css">
-	<link rel="stylesheet" href="/css/button.css">
-	<link rel="stylesheet" href="/css/button2.css">
-	<link rel="stylesheet" href="/css/busca.css">
-	<link rel="stylesheet" href="/css/listarFerramentas.css">
-	<link rel="stylesheet" href="/css/confirmacao.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Sementes</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS personalizados -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/button.css">
+    <link rel="stylesheet" href="/css/button2.css">
+    <link rel="stylesheet" href="/css/busca.css">
+    <!-- aqui deve estar o CSS que você me mandou (cards de sementes) -->
+    <link rel="stylesheet" href="/css/listarFerramentas.css">
+    <link rel="stylesheet" href="/css/confirmacao.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
-<body class="text-white" style="background-color: #212121;">
+<!-- usa o tema claro dos cards -->
+<body class="cards-page-body">
 
-	<!-- Inclui a sidebar como fragmento -->
-	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-	<div class="container mt-5">
-		<h1>Lista de Sementes</h1>
+    <!-- Conteúdo principal alinhado com a sidebar -->
+    <div class="container py-4 with-sidebar">
 
-		<div class="d-flex justify-content-between align-items-center mt-4">
+        <!-- Cabeçalho -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+            <div>
+                <h1 class="page-title">Lista de Sementes</h1>
+                <p class="page-subtitle">Visualização geral das sementes cadastradas no sistema.</p>
+            </div>
+        </div>
 
-			<!-- Botão Voltar para Cards -->
-			<button class="ml-3" onclick="window.location.href='/sementes'">
-				<span class="text">Listar em Tabelas</span>
-			</button>
+        <!-- Toolbar: botão + busca -->
+        <div class="row toolbar-row align-items-center">
+            <!-- Botão "Listar em Tabelas" -->
+            <div class="col-md-4 mb-3 mb-md-0">
+                <button class="toolbar-btn" onclick="window.location.href='/sementes'">
+                    <span class="text">Listar em Tabelas</span>
+                </button>
+            </div>
 
+            <!-- Busca -->
+            <div class="col-md-8 d-flex justify-content-md-end justify-content-start">
+                <form action="/sementes/buscar" method="get" class="d-flex w-100" style="max-width: 420px;">
+                    <input type="hidden" name="formato" value="cards">
 
-			<!-- Formulário centralizado -->
-			<div class="d-flex justify-content-center flex-grow-1">
-				<form action="/sementes/buscar" method="get" class="d-flex" style="max-width: 500px; width: 100%;">
-					<!-- Campo oculto para definir o formato -->
-					<input type="hidden" name="formato" value="cards"> <!-- Altere para 'tabelas' onde necessário -->
+                    <div class="galaxy"></div>
+                    <div id="search-container">
+                        <div class="nebula"></div>
+                        <div class="starfield"></div>
+                        <div class="cosmic-dust"></div>
+                        <div class="cosmic-dust"></div>
+                        <div class="cosmic-dust"></div>
+                        <div class="stardust"></div>
+                        <div class="cosmic-ring"></div>
+                        <div id="main" class="d-flex align-items-center">
+                            <input class="input flex-grow-1" name="nome" type="text" placeholder="Buscar Semente" />
+                            <div id="input-mask"></div>
+                            <div id="cosmic-glow"></div>
+                            <div class="wormhole-border"></div>
+                            <div id="search-icon">
+                                <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                     stroke="url(#cosmic-search)" fill="none" height="24" width="24" viewBox="0 0 24 24">
+                                    <circle r="8" cy="11" cx="11"></circle>
+                                    <line y2="16.65" x2="16.65" y1="21" x1="21"></line>
+                                    <defs>
+                                        <linearGradient gradientTransform="rotate(45)" id="cosmic-search">
+                                            <stop stop-color="#a9c7ff" offset="0%"></stop>
+                                            <stop stop-color="#6e8cff" offset="100%"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <button2 type="submit"></button2>
+                </form>
+            </div>
+        </div>
 
-					<div class="galaxy"></div>
-					<div id="search-container">
-						<div class="nebula"></div>
-						<div class="starfield"></div>
-						<div class="cosmic-dust"></div>
-						<div class="cosmic-dust"></div>
-						<div class="cosmic-dust"></div>
-						<div class="stardust"></div>
-						<div class="cosmic-ring"></div>
-						<div id="main" class="d-flex align-items-center">
-							<input class="input flex-grow-1" name="nome" type="text" placeholder="Buscar Semente" />
-							<div id="input-mask"></div>
-							<div id="cosmic-glow"></div>
-							<div class="wormhole-border"></div>
-							<div id="search-icon">
-								<svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
-									stroke="url(#cosmic-search)" fill="none" height="24" width="24" viewBox="0 0 24 24">
-									<circle r="8" cy="11" cx="11"></circle>
-									<line y2="16.65" x2="16.65" y1="21" x1="21"></line>
-									<defs>
-										<linearGradient gradientTransform="rotate(45)" id="cosmic-search">
-											<stop stop-color="#a9c7ff" offset="0%"></stop>
-											<stop stop-color="#6e8cff" offset="100%"></stop>
-										</linearGradient>
-									</defs>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<button2 type="submit"></button2>
-				</form>
-			</div>
+        <hr class="mt-3">
 
-		</div>
+        <!-- Mensagem de Confirmação -->
+        <div id="confirmationMessage" class="d-none"></div>
 
-		<hr class="mt-3">
+        <!-- GRID de cards -->
+        <div class="cards-container mt-3">
 
-		<!-- Mensagem de Confirmação -->
-		<div id="confirmationMessage" class="d-none"></div>
+            <!-- Card de cada semente -->
+            <div class="tool-card" th:each="semente : ${sementes}">
+                <!-- Cabeçalho do card -->
+                <div class="tool-card-header">
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h5 class="tool-title" th:text="${semente.nome}">Nome da Semente</h5>
+                </div>
 
-		<!-- Cards de sementes -->
-		<div class="row">
+                <!-- Corpo do card -->
+                <div class="tool-body">
 
-			<div class="col-md-4 col-sm-6 mb-4" th:each="semente, iterStat : ${sementes}">
-				<div class="card text-white shadow-lg" style="border-radius: 15px; overflow: hidden;">
-					<div class="card-body">
-						<h5 class="card-title" th:text="${semente.nome}"></h5>
-						<p class="card-text"><strong style="color: yellow;">Data de Colheita:</strong> <span
-								th:text="${semente.dataColheita}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Data de Validade:</strong> <span
-								th:text="${semente.dataValidade}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Quantidade:</strong> <span
-								th:text="${semente.quantidade}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Condições de Armazenamento:</strong> <span
-								th:text="${semente.condicoesArmazenamento}"></span></p>
-						<p class="card-text"><strong style="color: yellow;">Produtor/Fabricante:</strong> <span
-								th:text="${semente.produtorFabricante}"></span></p>
-					</div>
-					<div class="card-footer text-center">
-						<a th:href="@{/sementes/editar/{id}(id=${semente.id})}" class="btn btn-warning btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja editar esta semente?');">
-							<i class="fas fa-edit"></i> Editar
-						</a>
-						<a th:href="@{/sementes/deletar/{id}(id=${semente.id})}" class="btn btn-danger btn-sm mb-2"
-							onclick="return confirm('Tem certeza que deseja deletar esta semente?');">
-							<i class="fas fa-trash-alt"></i> Deletar
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <div class="tool-field">
+                        <span class="tool-label">Data de Colheita</span>
+                        <span class="tool-value"
+                              th:text="${semente.dataColheita}">01/01/2025</span>
+                    </div>
 
-	</div>
+                    <div class="tool-field">
+                        <span class="tool-label">Data de Validade</span>
+                        <span class="tool-value"
+                              th:text="${semente.dataValidade}">01/01/2026</span>
+                    </div>
 
-	<!-- Link para o arquivo JS externo -->
-	<script src="/js/confirmacaoDelete.js"></script>
+                    <div class="tool-field">
+                        <span class="tool-label">Quantidade</span>
+                        <span class="tool-value quantity"
+                              th:text="${semente.quantidade}">10 sacos</span>
+                    </div>
 
-	<!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                    <div class="tool-field">
+                        <span class="tool-label">Condições de Armazenamento</span>
+                        <span class="tool-value"
+                              th:text="${semente.condicoesArmazenamento}">
+                            Local seco e arejado
+                        </span>
+                    </div>
+
+                    <div class="tool-field">
+                        <span class="tool-label">Produtor / Fabricante</span>
+                        <span class="tool-value"
+                              th:text="${semente.produtorFabricante}">
+                            Cooperativa X
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Rodapé / Ações -->
+                <div class="tool-footer d-flex justify-content-between gap-2">
+                    <a th:href="@{/sementes/editar/{id}(id=${semente.id})}"
+                       class="btn btn-edit-premium"
+                       onclick="return confirm('Tem certeza que deseja editar esta semente?');">
+                        <i class="fas fa-edit"></i>
+                        <span>Editar</span>
+                    </a>
+
+                    <a th:href="@{/sementes/deletar/{id}(id=${semente.id})}"
+                       class="btn btn-delete-premium"
+                       onclick="return confirm('Tem certeza que deseja deletar esta semente?');">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Deletar</span>
+                    </a>
+                </div>
+            </div>
+            <!-- fim th:each -->
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/confirmacaoDelete.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
